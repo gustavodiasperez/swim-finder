@@ -84,7 +84,7 @@ async function carregarTodasAvaliacoes() {
 
         const resposta =
             await fetch(
-                "http://127.0.0.1:8000/avaliacoes"
+                "/avaliacoes"
             );
 
         if (!resposta.ok) {
@@ -175,7 +175,7 @@ botao.addEventListener("click", async function () {
 
     try {
 
-        const resposta = await fetch("http://127.0.0.1:8000/piscinas");
+        const resposta = await fetch("/piscinas");
 
         const piscinas = await resposta.json();
 
@@ -790,7 +790,7 @@ busca.addEventListener("input", async function () {
 
     try {
 
-        const resposta = await fetch("http://127.0.0.1:8000/piscinas");
+        const resposta = await fetch("/piscinas");
         const piscinas = await resposta.json();
 
         const encontradas = piscinas.filter(function (piscina) {

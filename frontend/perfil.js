@@ -80,7 +80,7 @@ async function carregarAvaliacoesUsuario() {
 
         const resposta =
             await fetch(
-                "http://127.0.0.1:8000/avaliacoes/usuario/" +
+                "/avaliacoes/usuario/" +
                 encodeURIComponent(nomeUsuario)
             );
 
@@ -119,7 +119,7 @@ async function carregarMinhasAvaliacoes() {
 
         const resposta =
             await fetch(
-                "http://127.0.0.1:8000/avaliacoes/usuario/" +
+                "/avaliacoes/usuario/" +
                 encodeURIComponent(nomeUsuario)
             );
 

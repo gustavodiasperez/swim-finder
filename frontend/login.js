@@ -10,7 +10,7 @@ formLogin.addEventListener("submit", async function (evento) {
 
     try {
 
-        const resposta = await fetch("http://127.0.0.1:8000/login", {
+        const resposta = await fetch("/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

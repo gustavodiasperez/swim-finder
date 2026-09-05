@@ -86,7 +86,7 @@ async function carregarDetalhes() {
     try {
 
         const resposta =
-            await fetch("http://127.0.0.1:8000/piscinas");
+            await fetch("/piscinas");
 
         if (!resposta.ok) {
             throw new Error(
@@ -644,7 +644,7 @@ function prepararAvaliacoes() {
 
                     const resposta =
                         await fetch(
-                            "http://127.0.0.1:8000/avaliacoes",
+                            "/avaliacoes",
                             {
                                 method: "POST",
 
@@ -816,7 +816,7 @@ async function carregarAvaliacoes() {
 
         const resposta =
             await fetch(
-                "http://127.0.0.1:8000/avaliacoes/" +
+                "/avaliacoes/" +
                 encodeURIComponent(nomePiscina)
             );
 

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Swim Finder</title>
+
+    <link rel="stylesheet" href="/frontend/style.css">
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+</head>
+
+<body>
+
+    <main class="container">
+
+
+        <section class="cabecalho">
+
+            <h1>🏊 Swim Finder</h1>
+
+            <p id="usuarioLogado"></p>
+
+            <p>
+                Encontre piscinas para treinar perto de você.
+            </p>
+
+        </section>
+
+        <section class="busca">
+
+            <div class="barra-pesquisa">
+
+                <div class="campo-pesquisa">
+
+                    <input 
+                        type="text" 
+                        id="cidade"
+                        placeholder="🔎 Digite sua cidade ou bairro"
+                    >
+
+                    <div id="sugestoes"></div>
+
+                </div>
+
+                <button id="botaoBuscar">
+                    🔍 Buscar
+                </button>
+
+            </div>
+
+
+            <div class="acoes">
+
+                <button id="botaoLocalizacao">
+                    📍 Usar minha localização
+                </button>
+
+                <button id="botaoFavoritos">
+                    ⭐ Favoritos (0)
+                </button>
+
+                <button id="botaoTema" class="botao-tema">
+                    🌙 Modo escuro
+                </button>
+
+                <button id="botaoSair">
+                    🚪 Sair
+                </button>
+
+                <button id="botaoPerfil">
+                    👤 Perfil
+                </button>
+
+            </div>
+
+        </section>
+
+      <section class="filtros">
+
+        <div class="filtro">
+
+            <label for="tipo">
+                🏊 Tipo de piscina
+            </label>
+
+            <select id="tipo">
+
+                <option value="todos">
+                    Todos
+                </option>
+
+                <option value="olimpica">
+                    Olímpica
+                </option>
+
+                <option value="semiolimpica">
+                    Semiolímpica
+                </option>
+
+                <option value="outra">
+                    Outra
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="filtro">
+
+            <label for="filtroCategoria">
+                🏢 Tipo de local
+            </label>
+
+            <select id="filtroCategoria">
+
+                <option value="todos">
+                    Todos
+                </option>
+
+                <option value="publica">
+                    🏊 Piscina pública
+                </option>
+
+                <option value="academia">
+                    🏋️ Academia
+                </option>
+
+                <option value="clube">
+                    🏢 Clube
+                </option>
+
+                <option value="hotel">
+                    🏨 Hotel / Day Use
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="filtro">
+
+            <label for="distanciaMax">
+                📏 Distância máxima
+            </label>
+
+            <select id="distanciaMax">
+
+                <option value="todos">
+                    Qualquer distância
+                </option>
+
+                <option value="5">
+                    Até 5 km
+                </option>
+
+                <option value="10">
+                    Até 10 km
+                </option>
+
+                <option value="20">
+                    Até 20 km
+                </option>
+
+            </select>
+
+        </div>
+
+    </section>  
+
+        <section class="mapa-container">
+
+            <h2>🗺️ Piscinas próximas</h2>
+
+            <div id="mapa"></div>
+
+        </section>
+        
+        <section id="resultados"></section>
+
+    </main>
+
+    <div id="modal" class="modal" style="display: none">
+
+        <div class="modal-conteudo">
+
+            <button id="fecharModal" class="fechar-modal">
+                ✕
+            </button>
+
+            <div id="detalhesPiscina"></div>
+
+        </div>
+
+    </div>
+    
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+    
+    <script src="/frontend/script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,521 @@
+[
+    {
+        "nome": "CE Jardim São Paulo",
+        "endereco": "Rua Viri, 425 - Jardim São Paulo, São Paulo - SP",
+        "tipo": "Semiolímpica",
+        "latitude": -23.4919,
+        "longitude": -46.6137,
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "foto": "/frontend/imagens/ce jardim sp.webp",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Santo Amaro - Joerg Bruder",
+        "endereco": "Avenida Padre José Maria, 555 - Santo Amaro, São Paulo - SP",
+        "tipo": "Semiolímpica",
+        "latitude": -23.6547,
+        "longitude": -46.7105,
+        "foto": "/frontend/imagens/ce santo amaro.webp",
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Náutico Guarapiranga",
+        "endereco": "Avenida dos Funcionários Públicos, 2501 - Jardim Horizonte Azul, São Paulo - SP",
+        "tipo": "Olímpica",
+        "latitude": -23.7278,
+        "longitude": -46.7546,
+        "foto": "/frontend/imagens/ce nautico.webp",
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Pirituba - Geraldo José de Almeida",
+        "endereco": "Avenida Agenor Couto de Magalhães, 32 - Pirituba, São Paulo - SP",
+        "tipo": "Semiolímpica",
+        "latitude": -23.4865,
+        "longitude": -46.7220,
+        "foto": "/frontend/imagens/ce pirituba.webp",
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Ibirapuera - Mané Garrincha",
+        "endereco": "Rua Pedro de Toledo, 1651 - Vila Clementino, São Paulo - SP",
+        "tipo": "Piscina aquática",
+        "latitude": -23.5990,
+        "longitude": -46.6478,
+        "foto": "/frontend/imagens/ce ibirapuera.webp",
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Jardim Celeste - Mário Moraes",
+        "endereco": "Rua Edward Carmilo, 840 - Jardim Celeste, São Paulo - SP",
+        "tipo": "Semiolímpica",
+        "latitude": -23.6370,
+        "longitude": -46.6088,
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "foto": "/frontend/imagens/ce jardim celeste.webp",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Santana - Geraldo Alonso",
+        "endereco": "Rua Santos Dumont, 1318 - Santana, São Paulo - SP",
+        "tipo": "Semiolímpica",
+        "latitude": -23.5050,
+        "longitude": -46.6265,
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+    {
+        "nome": "CE Campo Limpo - Sinésio Rocha",
+        "endereco": "Rua Cibaúma, 54 - Campo Limpo, São Paulo - SP",
+        "tipo": "Piscina retangular",
+        "latitude": -23.6390,
+        "longitude": -46.7650,
+        "categoria": "publica",
+        "mensalidade": "Gratuito",
+        "day_use": "Gratuito",
+        "horario": {
+            "segunda": "fechado",
+            "terca": "08:00-12:00,13:00-17:00",
+            "quarta": "08:00-12:00,13:00-17:00",
+            "quinta": "08:00-12:00,13:00-17:00",
+            "sexta": "08:00-12:00,13:00-17:00",
+            "sabado": "08:00-12:00,13:00-17:00",
+            "domingo": "08:00-12:00,13:00-17:00"
+        }
+    },
+
+{
+    "nome": "Academia Opus Fitness",
+    "endereco": "R. Sen. Georgino Avelino, 13 - Itaquera, São Paulo - SP",
+    "tipo": "Piscina + academia",
+    "categoria": "academia",
+    "mensalidade": "R$ 273/mês (Plano Teen 14-17)",
+    "day_use": "Não informado",
+    "foto": "/frontend/imagens/Academia Opus Fitness.webp",
+    "latitude": -23.5320,
+    "longitude": -46.4510,
+    "horario": {
+        "segunda": "06:00-22:50",
+        "terca": "06:00-22:50",
+        "quarta": "06:00-22:50",
+        "quinta": "06:00-22:50",
+        "sexta": "06:00-22:50",
+        "sabado": "07:00-16:00",
+        "domingo": "08:00-13:00"
+    }
+},
+{
+    "nome": "Academia Aquapoint",
+    "endereco": "Praça Haroldo Daltro, 56 - Vila Nova Manchester, São Paulo - SP",
+    "tipo": "Piscina + academia",
+    "categoria": "academia",
+    "mensalidade": "A partir de R$ 226/mês (Clube+)",
+    "day_use": "Não informado",
+    "foto": "/frontend/imagens/aquapoint.webp",
+    "latitude": -23.5420,
+    "longitude": -46.5210,
+    "horario": {
+        "segunda": "06:00-22:00",
+        "terca": "06:00-22:00",
+        "quarta": "06:00-22:00",
+        "quinta": "06:00-22:00",
+        "sexta": "06:00-22:00",
+        "sabado": "08:00-12:00",
+        "domingo": "fechado"
+    }
+},
+{
+    "nome": "Aquademic Academia",
+    "endereco": "R. Solidônio Leite, 2233 - Vila Ema, São Paulo - SP",
+    "tipo": "Piscina aquecida + academia",
+    "categoria": "academia",
+    "mensalidade": "Natação: sob consulta",
+    "day_use": "Não informado",
+    "foto": "/frontend/imagens/Aquademic Academia.webp",
+    "latitude": -23.5990,
+    "longitude": -46.5580,
+    "horario": {
+        "segunda": "06:00-22:45",
+        "terca": "06:00-22:45",
+        "quarta": "06:00-22:45",
+        "quinta": "06:00-22:45",
+        "sexta": "06:00-22:00",
+        "sabado": "08:00-14:00",
+        "domingo": "09:00-13:00"
+    }
+},
+{
+    "nome": "Acqua Morumbi Academia",
+    "endereco": "Rua Franco Alfano, 187 - Jardim Vazani, São Paulo - SP",
+    "tipo": "Piscina + academia",
+    "categoria": "academia",
+    "mensalidade": "Consultar academia",
+    "day_use": "Não informado",
+    "foto": "/frontend/imagens/Acqua Morumbi Academia.webp",
+    "latitude": -23.6220,
+    "longitude": -46.7250,
+    "horario": {
+        "segunda": "06:00-22:00",
+        "terca": "06:00-22:00",
+        "quarta": "06:00-22:00",
+        "quinta": "06:00-22:00",
+        "sexta": "06:00-21:30",
+        "sabado": "08:00-14:00",
+        "domingo": "fechado"
+    }
+},
+{
+    "nome": "Deep Blue Vila Leopoldina",
+    "endereco": "R. Carlos Weber, 1672 - Vila Leopoldina, São Paulo - SP",
+    "tipo": "Piscina climatizada + academia",
+    "categoria": "academia",
+    "mensalidade": "R$ 159/mês por pessoa (promoção Club+)",
+    "day_use": "Não informado",
+    "foto": "/frontend/imagens/Deep Blue Vila Leopoldina.webp",
+    "latitude": -23.5320,
+    "longitude": -46.7400,
+    "horario": {
+        "segunda": "06:00-22:00",
+        "terca": "06:00-22:00",
+        "quarta": "06:00-22:00",
+        "quinta": "06:00-22:00",
+        "sexta": "06:00-22:00",
+        "sabado": "08:00-13:00",
+        "domingo": "fechado"
+    }
+},
+{
+    "nome": "Deep Move Interlagos",
+    "endereco": "R. Dr. Epaminondas Barra, 121 - Vila do Castelo, São Paulo - SP",
+    "tipo": "Piscina aquecida + academia",
+    "categoria": "academia",
+    "mensalidade": "Consultar academia",
+    "day_use": "Não informado",
+    "foto": "/frontend/imagens/Deep Move Interlagos.webp",
+    "latitude": -23.6840,
+    "longitude": -46.6960,
+    "horario": {
+        "segunda": "06:00-22:00",
+        "terca": "06:00-22:00",
+        "quarta": "06:00-22:00",
+        "quinta": "06:00-22:00",
+        "sexta": "06:00-22:00",
+        "sabado": "08:00-13:00",
+        "domingo": "fechado"
+    }
+},
+{
+    "nome": "AOPM - Associação dos Oficiais da Polícia Militar",
+    "endereco": "Rua Mamud Rahd, 973 - Tremembé, São Paulo - SP",
+    "tipo": "Piscina aquecida + natação",
+    "categoria": "clube",
+    "mensalidade": "R$ 172,10/mês para sócio",
+    "day_use": "Consultar",
+    "foto": "/frontend/imagens/AOPM - Associação dos Oficiais da Polícia Militar.webp",
+    "latitude": -23.4570,
+    "longitude": -46.6100,
+    "horario": {
+        "segunda": "fechado",
+        "terca": "07:20-20:10",
+        "quarta": "07:20-20:10",
+        "quinta": "07:20-20:10",
+        "sexta": "07:20-20:10",
+        "sabado": "fechado",
+        "domingo": "fechado"
+    }
+},
+{
+    "nome": "Clube Esperia",
+    "endereco": "Av. Santos Dumont, 1313 - Santana, São Paulo - SP",
+    "tipo": "Clube + piscinas",
+    "categoria": "clube",
+    "mensalidade": "Consultar",
+    "day_use": "Consultar",
+    "foto": "/frontend/imagens/Clube Esperia.webp",
+    "latitude": -23.5066,
+    "longitude": -46.6288,
+    "horario": {
+        "segunda": "06:00-23:00",
+        "terca": "06:00-23:00",
+        "quarta": "06:00-23:00",
+        "quinta": "06:00-23:00",
+        "sexta": "06:00-23:00",
+        "sabado": "06:00-21:00",
+        "domingo": "06:00-21:00"
+    }
+},
+{
+    "nome": "Círculo Militar de São Paulo",
+    "endereco": "Rua Abílio Soares, 1589 - Ibirapuera, São Paulo - SP",
+    "tipo": "Clube + piscinas",
+    "categoria": "clube",
+    "mensalidade": "Consultar",
+    "day_use": "Consultar",
+    "foto": "/frontend/imagens/Círculo Militar de São Paulo.webp",
+    "latitude": -23.5877,
+    "longitude": -46.6539,
+    "horario": {
+        "segunda": "06:00-21:00",
+        "terca": "06:00-21:00",
+        "quarta": "06:00-21:00",
+        "quinta": "06:00-21:00",
+        "sexta": "06:00-21:00",
+        "sabado": "07:00-19:00",
+        "domingo": "07:00-19:00"
+    }
+},
+{
+    "nome": "CEU Água Azul",
+    "endereco": "Av. dos Metalúrgicos, 1262 - Cidade Tiradentes, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "latitude": -23.5900,
+    "longitude": -46.3980,
+    "foto": "/frontend/imagens/CEU Água Azul.webp",
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Alvarenga",
+    "endereco": "Estrada do Alvarenga, 3752 - Balneário São Francisco, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Alvarenga.webp",
+    "latitude": -23.7000,
+    "longitude": -46.6500,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Butantã",
+    "endereco": "Av. Eng. Heitor Antônio Eiras Garcia, 1870 - Jardim Esmeralda, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Butantã.webp",
+    "latitude": -23.5840,
+    "longitude": -46.7580,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Campo Limpo",
+    "endereco": "Av. Carlos Lacerda, 678 - Jardim Bom Refúgio, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Campo Limpo.webp",
+    "latitude": -23.6480,
+    "longitude": -46.7750,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Guarapiranga",
+    "endereco": "Estrada da Baronesa, 1120 - Jardim Ângela, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Guarapiranga.webp",
+    "latitude": -23.6830,
+    "longitude": -46.7610,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Jaguaré",
+    "endereco": "Av. Kenkiti Simomoto, 80 - Jaguaré, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Jaguaré.webp",
+    "latitude": -23.5450,
+    "longitude": -46.7500,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Meninos",
+    "endereco": "Rua Barbinos, 111 - São João Clímaco, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Meninos.webp",
+    "latitude": -23.6240,
+    "longitude": -46.5900,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Parque Novo Mundo",
+    "endereco": "Rua Jacofer, 615 - Parque Novo Mundo, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Parque Novo Mundo.webp",
+    "latitude": -23.5100,
+    "longitude": -46.5750,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+},
+{
+    "nome": "CEU Perus",
+    "endereco": "Rua Bernardo José de Lorena, s/n - Vila Caiúba, São Paulo - SP",
+    "tipo": "Piscina pública",
+    "categoria": "publica",
+    "mensalidade": "Gratuito",
+    "day_use": "Gratuito",
+    "foto": "/frontend/imagens/CEU Perus.webp",
+    "latitude": -23.4110,
+    "longitude": -46.7560,
+    "horario": {
+        "segunda": "08:00-22:00",
+        "terca": "08:00-22:00",
+        "quarta": "08:00-22:00",
+        "quinta": "08:00-22:00",
+        "sexta": "08:00-22:00",
+        "sabado": "08:00-20:00",
+        "domingo": "08:00-20:00"
+    }
+}
+]

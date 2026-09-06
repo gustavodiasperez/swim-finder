@@ -58,6 +58,10 @@ class Avaliacao(BaseModel):
     nota: int
     comentario: str
 
+class FotoPerfil(BaseModel):
+    email: str
+    foto: str
+
 
 # =========================
 # FUNÇÕES
@@ -273,6 +277,52 @@ def alterar_senha(dados: AlterarSenha):
             "sucesso": True,
             "mensagem": "Senha alterada com sucesso!"
         }
+
+    return {
+        "sucesso": False,
+        "mensagem": "Usuário não encontrado."
+    }
+
+@app.post("/usuario/foto")
+def salvar_foto_perfil(dados: FotoPerfil):
+    usuarios = carregar_usuarios()
+
+    email = dados.email.strip().lower()
+
+    for usuario in usuarios:
+
+        if usuario["email"] == email:
+
+            usuario["foto"] = dados.foto
+
+            salvar_usuarios(usuarios)
+
+            return {
+                "sucesso": True,
+                "mensagem": "Foto de perfil atualizada com sucesso!"
+            }
+
+    return {
+        "sucesso": False,
+        "mensagem": "Usuário não encontrado."
+    }
+
+@app.get("/usuario/{email}")
+def obter_usuario(email: str):
+    usuarios = carregar_usuarios()
+
+    email = email.strip().lower()
+
+    for usuario in usuarios:
+
+        if usuario["email"] == email:
+
+            return {
+                "sucesso": True,
+                "nome": usuario["nome"],
+                "email": usuario["email"],
+                "foto": usuario.get("foto", "")
+            }
 
     return {
         "sucesso": False,

@@ -55,6 +55,68 @@ const fotoPerfilPagina =
 const avatarPerfilPadrao =
     document.querySelector("#avatarPerfilPadrao");
 
+
+async function carregarFotoPerfil() {
+
+    try {
+
+        const resposta =
+            await fetch(
+                "/usuario/" +
+                encodeURIComponent(emailUsuario)
+            );
+
+        if (!resposta.ok) {
+            throw new Error(
+                "Erro HTTP: " + resposta.status
+            );
+        }
+
+        const usuario =
+            await resposta.json();
+
+        if (
+            usuario.sucesso &&
+            usuario.foto
+        ) {
+
+            fotoPerfilPagina.src =
+                usuario.foto;
+
+            fotoPerfilPagina.style.display =
+                "block";
+
+            avatarPerfilPadrao.style.display =
+                "none";
+
+        } else {
+
+            fotoPerfilPagina.style.display =
+                "none";
+
+            avatarPerfilPadrao.style.display =
+                "flex";
+
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar foto:",
+            erro
+        );
+
+    }
+
+}
+
+
+carregarFotoPerfil();
+
+// =========================
+// FOTO DE PERFIL
+// =========================
+
 const fotoPerfilSalva =
     localStorage.getItem("fotoPerfil");
 

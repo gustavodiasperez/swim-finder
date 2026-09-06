@@ -41,7 +41,9 @@
         </div>
 
 
-        <div class="menu-usuario">
+     <div class="menu-usuario">
+
+        <div class="menu-avatar">
 
             <img
                 id="fotoPerfilMenu"
@@ -53,21 +55,22 @@
             <span id="avatarMenuPadrao">
                 👤
             </span>
-        </div>
-
-            <div>
-
-                <strong id="nomeMenu">
-                    Usuário
-                </strong>
-
-                <span>
-                    Swim Finder
-                </span>
-
-            </div>
 
         </div>
+
+        <div>
+
+            <strong id="nomeMenu">
+                Usuário
+            </strong>
+
+            <span>
+                Swim Finder
+            </span>
+
+        </div>
+
+    </div>   
 
 
         <div class="menu-opcoes">
@@ -505,7 +508,8 @@
 
         }
 
-        // =========================
+
+// =========================
 // FOTO DE PERFIL NO MENU
 // =========================
 
@@ -515,44 +519,116 @@ const fotoPerfilMenu =
 const avatarMenuPadrao =
     document.querySelector("#avatarMenuPadrao");
 
-const fotoPerfilSalva =
-    localStorage.getItem("fotoPerfil");
+
+async function carregarFotoMenu() {
+
+    if (!fotoPerfilMenu || !avatarMenuPadrao) {
+        return;
+    }
+
+    const email =
+        localStorage.getItem("emailUsuario");
+
+    if (!email) {
+        avatarMenuPadrao.style.display = "flex";
+        fotoPerfilMenu.style.display = "none";
+        return;
+    }
+
+    try {
+
+        const resposta =
+            await fetch(
+                "/usuario/" +
+                encodeURIComponent(email)
+            );
+
+        if (!resposta.ok) {
+            throw new Error(
+                "Erro HTTP: " + resposta.status
+            );
+        }
+
+        const usuario =
+            await resposta.json();
 
 
-if (fotoPerfilSalva) {
+        if (
+            usuario.sucesso &&
+            usuario.foto
+        ) {
 
-    fotoPerfilMenu.src =
-        fotoPerfilSalva;
+            fotoPerfilMenu.src =
+                usuario.foto;
 
-    fotoPerfilMenu.style.display =
-        "block";
+            fotoPerfilMenu.style.display =
+                "block";
 
-    avatarMenuPadrao.style.display =
-        "none";
+            avatarMenuPadrao.style.display =
+                "none";
 
-} else {
+            return;
+        }
 
-    fotoPerfilMenu.style.display =
-        "none";
+    } catch (erro) {
 
-    avatarMenuPadrao.style.display =
-        "flex";
+        console.error(
+            "Erro ao carregar foto do menu:",
+            erro
+        );
+
+    }
+
+
+    // Reserva: foto antiga do navegador
+
+    const fotoLocal =
+        localStorage.getItem("fotoPerfil");
+
+    if (fotoLocal) {
+
+        fotoPerfilMenu.src =
+            fotoLocal;
+
+        fotoPerfilMenu.style.display =
+            "block";
+
+        avatarMenuPadrao.style.display =
+            "none";
+
+    } else {
+
+        fotoPerfilMenu.style.display =
+            "none";
+
+        avatarMenuPadrao.style.display =
+            "flex";
+
+    }
 
 }
 
 
+carregarFotoMenu();
+
         // Configurações
 
-        document
-            .querySelector("#botaoConfiguracoes")
-            .addEventListener(
+        const botaoConfiguracoes =
+            document.querySelector("#botaoConfiguracoes");
+
+        if (botaoConfiguracoes) {
+
+            botaoConfiguracoes.addEventListener(
                 "click",
                 function () {
 
-                    window.location.href = "/configuracoes";
+                    window.location.href =
+                        "/configuracoes";
 
                 }
             );
+
+        }
 
     </script>
 

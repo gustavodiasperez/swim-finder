@@ -324,20 +324,207 @@ fotoPerfil.addEventListener(
                 const foto =
                     evento.target.result;
 
-                localStorage.setItem(
-                    "fotoPerfil",
-                    foto
+                // =========================
+                // FOTO DE PERFIL
+                // =========================
+
+                const cardFotoPerfil =
+                    document.querySelector("#cardFotoPerfil");
+
+                const fotoPerfil =
+                    document.querySelector("#fotoPerfil");
+
+                const fotoPerfilPreview =
+                    document.querySelector("#fotoPerfilPreview");
+
+                const avatarPadrao =
+                    document.querySelector("#avatarPadrao");
+
+
+                function mostrarFotoPerfil(foto) {
+
+                    if (foto) {
+
+                        fotoPerfilPreview.src = foto;
+
+                        fotoPerfilPreview.style.display = "block";
+
+                        avatarPadrao.style.display = "none";
+
+                    } else {
+
+                        fotoPerfilPreview.style.display = "none";
+
+                        avatarPadrao.style.display = "flex";
+
+                    }
+
+                }
+
+
+                async function carregarFotoPerfil() {
+
+                    try {
+
+                        const resposta =
+                            await fetch(
+                                "/usuario/" +
+                                encodeURIComponent(emailUsuario)
+                            );
+
+                        if (!resposta.ok) {
+                            throw new Error(
+                                "Erro HTTP: " + resposta.status
+                            );
+                        }
+
+                        const usuario =
+                            await resposta.json();
+
+                        if (usuario.sucesso) {
+
+                            mostrarFotoPerfil(
+                                usuario.foto
+                            );
+
+                        }
+
+                    } catch (erro) {
+
+                        console.error(
+                            "Erro ao carregar foto:",
+                            erro
+                        );
+
+                    }
+
+                }
+
+
+                carregarFotoPerfil();
+
+
+                // Clicar no card abre a galeria
+
+                cardFotoPerfil.addEventListener(
+                    "click",
+                    function () {
+
+                        fotoPerfil.click();
+
+                    }
                 );
 
-                mostrarFotoPerfil(foto);
 
-            };
+                // Escolher nova foto
+
+                fotoPerfil.addEventListener(
+                    "change",
+                    async function () {
+
+                        const arquivo =
+                            fotoPerfil.files[0];
+
+                        if (!arquivo) {
+                            return;
+                        }
 
 
-        leitor.readAsDataURL(arquivo);
+                        const leitor =
+                            new FileReader();
 
-    }
-);
+
+                        leitor.onload =
+                            async function (evento) {
+
+                                const foto =
+                                    evento.target.result;
+
+
+                                try {
+
+                                    const resposta =
+                                        await fetch(
+                                            "/usuario/foto",
+                                            {
+                                                method: "POST",
+
+                                                headers: {
+                                                    "Content-Type":
+                                                        "application/json"
+                                                },
+
+                                                body: JSON.stringify({
+
+                                                    email:
+                                                        emailUsuario,
+
+                                                    foto:
+                                                        foto
+
+                                                })
+
+                                            }
+                                        );
+
+
+                                    const resultado =
+                                        await resposta.json();
+
+
+                                    if (
+                                        resposta.ok &&
+                                        resultado.sucesso
+                                    ) {
+
+                                        mostrarFotoPerfil(foto);
+
+                                        alert(
+                                            "✅ Foto de perfil atualizada!"
+                                        );
+
+                                    } else {
+
+                                        alert(
+                                            "❌ " +
+                                            (
+                                                resultado.mensagem ||
+                                                "Não foi possível salvar a foto."
+                                            )
+                                        );
+
+                                    }
+
+                                } catch (erro) {
+
+                                    console.error(
+                                        "Erro ao salvar foto:",
+                                        erro
+                                    );
+
+                                    alert(
+                                        "❌ Não foi possível conectar ao servidor."
+                                    );
+
+                                }
+
+                            };
+
+
+                        leitor.readAsDataURL(arquivo);
+
+                    }
+                );
+
+                                mostrarFotoPerfil(foto);
+
+                            };
+
+
+                        leitor.readAsDataURL(arquivo);
+
+                    }
+                );
 
 
 // =========================

@@ -13,7 +13,7 @@ if (usuarioLogado !== "true") {
 
 
 // =========================
-// DADOS DO USUÁRIO
+// DADOS
 // =========================
 
 const nomeUsuario =
@@ -21,18 +21,6 @@ const nomeUsuario =
 
 const emailUsuario =
     localStorage.getItem("emailUsuario");
-
-
-document.querySelector(
-    "#nomeUsuarioConfig"
-).textContent =
-    nomeUsuario || "Não informado";
-
-
-document.querySelector(
-    "#emailUsuarioConfig"
-).textContent =
-    emailUsuario || "Não informado";
 
 
 // =========================
@@ -52,14 +40,47 @@ if (temaSalvo === "escuro") {
 
 
 // =========================
-// NOTIFICAÇÕES
+// ELEMENTOS
 // =========================
 
-const botaoNotificacoes =
-    document.querySelector(
-        "#botaoNotificacoes"
-    );
+const cardNotificacoes =
+    document.querySelector("#cardNotificacoes");
 
+const statusNotificacoes =
+    document.querySelector("#statusNotificacoes");
+
+const cardConta =
+    document.querySelector("#cardConta");
+
+const cardSobre =
+    document.querySelector("#cardSobre");
+
+const areaConta =
+    document.querySelector("#areaConta");
+
+const areaSobre =
+    document.querySelector("#areaSobre");
+
+
+// =========================
+// NOME E EMAIL
+// =========================
+
+document.querySelector(
+    "#nomeUsuarioConfig"
+).textContent =
+    nomeUsuario || "Não informado";
+
+
+document.querySelector(
+    "#emailUsuarioConfig"
+).textContent =
+    emailUsuario || "Não informado";
+
+
+// =========================
+// NOTIFICAÇÕES
+// =========================
 
 let notificacoesAtivas =
     localStorage.getItem("notificacoes") === "true";
@@ -69,13 +90,13 @@ function atualizarNotificacoes() {
 
     if (notificacoesAtivas) {
 
-        botaoNotificacoes.textContent =
-            "🔔 Ativadas";
+        statusNotificacoes.textContent =
+            "Ativadas";
 
     } else {
 
-        botaoNotificacoes.textContent =
-            "🔕 Desativadas";
+        statusNotificacoes.textContent =
+            "Desativadas";
 
     }
 
@@ -85,7 +106,7 @@ function atualizarNotificacoes() {
 atualizarNotificacoes();
 
 
-botaoNotificacoes.addEventListener(
+cardNotificacoes.addEventListener(
     "click",
     function () {
 
@@ -104,17 +125,125 @@ botaoNotificacoes.addEventListener(
 
 
 // =========================
+// ABRIR CONTA
+// =========================
+
+cardConta.addEventListener(
+    "click",
+    function () {
+
+        document.querySelector(
+            "#cardNotificacoes"
+        ).style.display = "none";
+
+        document.querySelector(
+            "#cardConta"
+        ).style.display = "none";
+
+        document.querySelector(
+            "#cardSobre"
+        ).style.display = "none";
+
+        areaConta.style.display = "block";
+
+    }
+);
+
+
+// =========================
+// ABRIR SOBRE
+// =========================
+
+cardSobre.addEventListener(
+    "click",
+    function () {
+
+        document.querySelector(
+            "#cardNotificacoes"
+        ).style.display = "none";
+
+        document.querySelector(
+            "#cardConta"
+        ).style.display = "none";
+
+        document.querySelector(
+            "#cardSobre"
+        ).style.display = "none";
+
+        areaSobre.style.display = "block";
+
+    }
+);
+
+
+// =========================
+// VOLTAR PARA CONFIGURAÇÕES
+// =========================
+
+function voltarConfiguracoes() {
+
+    areaConta.style.display =
+        "none";
+
+    areaSobre.style.display =
+        "none";
+
+    document.querySelector(
+        "#cardNotificacoes"
+    ).style.display = "flex";
+
+    document.querySelector(
+        "#cardConta"
+    ).style.display = "flex";
+
+    document.querySelector(
+        "#cardSobre"
+    ).style.display = "flex";
+
+}
+
+
+document
+    .querySelector("#voltarConfiguracoes")
+    .addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "/app";
+
+        }
+    );
+
+
+document
+    .querySelector("#voltarConfiguracoesConta")
+    .addEventListener(
+        "click",
+        voltarConfiguracoes
+    );
+
+
+document
+    .querySelector("#voltarSobre")
+    .addEventListener(
+        "click",
+        voltarConfiguracoes
+    );
+
+
+// =========================
 // FOTO DE PERFIL
 // =========================
+
+const cardFotoPerfil =
+    document.querySelector(
+        "#cardFotoPerfil"
+    );
 
 const fotoPerfil =
     document.querySelector(
         "#fotoPerfil"
-    );
-
-const botaoFotoPerfil =
-    document.querySelector(
-        "#botaoFotoPerfil"
     );
 
 const fotoPerfilPreview =
@@ -128,17 +257,12 @@ const avatarPadrao =
     );
 
 
-const fotoSalva =
-    localStorage.getItem(
-        "fotoPerfil"
-    );
-
-
 function mostrarFotoPerfil(foto) {
 
     if (foto) {
 
-        fotoPerfilPreview.src = foto;
+        fotoPerfilPreview.src =
+            foto;
 
         fotoPerfilPreview.style.display =
             "block";
@@ -159,10 +283,14 @@ function mostrarFotoPerfil(foto) {
 }
 
 
-mostrarFotoPerfil(fotoSalva);
+mostrarFotoPerfil(
+    localStorage.getItem("fotoPerfil")
+);
 
 
-botaoFotoPerfil.addEventListener(
+// Clicar no card abre a galeria
+
+cardFotoPerfil.addEventListener(
     "click",
     function () {
 
@@ -171,6 +299,8 @@ botaoFotoPerfil.addEventListener(
     }
 );
 
+
+// Quando escolher a foto
 
 fotoPerfil.addEventListener(
     "change",
@@ -215,13 +345,15 @@ fotoPerfil.addEventListener(
 // =========================
 
 document
-    .querySelector("#botaoAlterarSenha")
+    .querySelector("#cardAlterarSenha")
     .addEventListener(
         "click",
         async function () {
 
             const senhaAtual =
-                prompt("Digite sua senha atual:");
+                prompt(
+                    "Digite sua senha atual:"
+                );
 
             if (senhaAtual === null) {
                 return;
@@ -256,6 +388,7 @@ document
                 );
 
                 return;
+
             }
 
 
@@ -266,6 +399,7 @@ document
                 );
 
                 return;
+
             }
 
 
@@ -345,25 +479,6 @@ document
                 );
 
             }
-
-        }
-    );
-
-
-// =========================
-// VOLTAR
-// =========================
-
-document
-    .querySelector(
-        "#voltarConfiguracoes"
-    )
-    .addEventListener(
-        "click",
-        function () {
-
-            window.location.href =
-                "/app";
 
         }
     );

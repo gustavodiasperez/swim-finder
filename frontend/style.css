@@ -727,17 +727,6 @@ body.tema-escuro .preco-piscina {
     color: #63d89a;
 }
 
-.botao-voltar {
-    margin-bottom: 20px;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 10px;
-    background: #087ea4;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 .pagina-detalhes {
     background: white;
     border-radius: 22px;
@@ -887,17 +876,6 @@ body.tema-escuro .categoria-detalhes {
 /* =========================
    PÁGINA DE DETALHES
    ========================= */
-
-.botao-voltar {
-    margin-bottom: 20px;
-    padding: 11px 18px;
-    border: none;
-    border-radius: 10px;
-    background: #087ea4;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
 
 .pagina-detalhes {
     background: white;
@@ -1647,4 +1625,454 @@ body.tema-escuro .avatar-padrao {
         align-items: flex-start;
     }
 
+}
+
+/* =========================
+   FOTO DE PERFIL
+========================= */
+
+.foto-perfil-pagina {
+    width: 110px;
+    height: 110px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#fotoPerfilPagina {
+    width: 110px;
+    height: 110px;
+
+    object-fit: cover;
+    border-radius: 50%;
+
+    display: none;
+}
+
+#avatarPerfilPadrao {
+    width: 110px;
+    height: 110px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e8e8e8;
+
+    font-size: 50px;
+}
+
+body.tema-escuro #avatarPerfilPadrao {
+    background: #40535f;
+}
+
+/* =========================
+   CONFIGURAÇÕES EM CARDS
+========================= */
+
+.configuracoes-card {
+    max-width: 600px;
+    width: 100%;
+}
+
+.config-card {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px;
+
+    margin-top: 12px;
+
+    border-radius: 15px;
+
+    background: #f5f5f5;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    text-align: left;
+}
+
+.config-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.08);
+}
+
+.config-icone {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+
+    flex-shrink: 0;
+}
+
+.config-texto {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.config-texto strong {
+    font-size: 16px;
+}
+
+.config-texto p {
+    margin: 0;
+
+    font-size: 14px;
+
+    opacity: 0.65;
+}
+
+.config-seta {
+    font-size: 30px;
+
+    opacity: 0.45;
+}
+
+
+/* =========================
+   ÁREA DA CONTA
+========================= */
+
+.area-conta {
+    text-align: left;
+}
+
+.area-conta h2 {
+    margin-bottom: 20px;
+
+    color: #087ea4;
+}
+
+.conta-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px;
+
+    margin-top: 10px;
+
+    border-radius: 14px;
+
+    background: #f5f5f5;
+}
+
+.conta-clicavel {
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.conta-clicavel:hover {
+    transform: translateY(-2px);
+}
+
+.config-conta-info {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.config-conta-info p {
+    margin: 0;
+
+    font-size: 14px;
+
+    opacity: 0.65;
+}
+
+
+/* =========================
+   FOTO
+========================= */
+
+.conta-foto {
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.conta-foto:hover {
+    transform: translateY(-2px);
+}
+
+.foto-config-container {
+    width: 60px;
+    height: 60px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #e8e8e8;
+}
+
+.foto-perfil-preview {
+    width: 60px;
+    height: 60px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    display: none;
+}
+
+.avatar-padrao {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+}
+
+
+/* =========================
+   SOBRE
+========================= */
+
+.sobre-app {
+    text-align: center;
+
+    padding: 30px;
+
+    background: #f5f5f5;
+
+    border-radius: 15px;
+}
+
+.sobre-logo {
+    font-size: 55px;
+}
+
+.sobre-app h3 {
+    margin: 10px 0;
+
+    color: #087ea4;
+}
+
+.sobre-app p {
+    opacity: 0.7;
+}
+
+
+/* =========================
+   MODO ESCURO
+========================= */
+
+body.tema-escuro .config-card,
+body.tema-escuro .conta-item,
+body.tema-escuro .sobre-app {
+    background: #25333d;
+}
+
+body.tema-escuro .area-conta h2 {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .foto-config-container,
+body.tema-escuro .avatar-padrao {
+    background: #40535f;
+}
+
+body.tema-escuro .config-texto p,
+body.tema-escuro .config-conta-info p {
+    color: #d5d5d5;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+    .configuracoes-card {
+        margin: 10px;
+    }
+
+    .config-card {
+        padding: 16px;
+    }
+
+}
+
+/* =========================
+   VOLTAR DAS CONFIGURAÇÕES
+========================= */
+
+.botao-voltar-config {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 0;
+
+    border: none;
+    background: transparent;
+
+    color: #087ea4;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-voltar-config:hover {
+    color: #066580;
+    transform: translateX(-3px);
+}
+
+body.tema-escuro .botao-voltar-config {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .botao-voltar-config:hover {
+    color: white;
+}
+
+/* VOLTAR - REGRA FINAL */
+.botao-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-bottom: 20px;
+    padding: 8px 0;
+
+    border: none;
+    border-radius: 0;
+    background: transparent;
+
+    color: #087ea4;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-voltar:hover {
+    color: #066580;
+    transform: translateX(-3px);
+}
+
+body.tema-escuro .botao-voltar {
+    background: transparent;
+    color: #5cc8ed;
+}
+
+#voltarApp {
+    display: inline-flex !important;
+    align-items: center !important;
+
+    margin-bottom: 20px !important;
+    padding: 8px 0 !important;
+
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    color: #087ea4 !important;
+
+    font-size: 15px !important;
+    font-weight: bold !important;
+
+    cursor: pointer !important;
+}
+
+#voltarApp:hover {
+    background: transparent !important;
+    color: #066580 !important;
+    transform: translateX(-3px) !important;
+}
+
+body.tema-escuro #voltarApp {
+    background: transparent !important;
+    color: #5cc8ed !important;
+}
+
+/* VOLTAR DAS CONFIGURAÇÕES */
+
+button.botao-voltar-config {
+    display: inline-flex !important;
+    align-items: center;
+
+    margin-bottom: 20px;
+    padding: 6px 0;
+
+    border: none !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+    box-shadow: none !important;
+
+    color: #087ea4;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button.botao-voltar-config:hover {
+    background: transparent !important;
+    color: #066580;
+    transform: translateX(-3px);
+}
+
+body.tema-escuro button.botao-voltar-config {
+    background: transparent !important;
+    color: #5cc8ed;
 }

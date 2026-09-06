@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,19 +13,165 @@
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
+    >
+
 </head>
 
 <body>
 
+    <!-- ========================= -->
+    <!-- MENU LATERAL -->
+    <!-- ========================= -->
+
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <aside id="menuLateral" class="menu-lateral">
+
+        <div class="menu-cabecalho">
+
+            <h2>🏊 Swim Finder</h2>
+
+            <button
+                id="fecharMenu"
+                class="fechar-menu"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div class="menu-usuario">
+
+            <div class="menu-avatar">
+                👤
+            </div>
+
+            <div>
+
+                <strong id="nomeMenu">
+                    Usuário
+                </strong>
+
+                <span>
+                    Swim Finder
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="menu-opcoes">
+
+            <button id="botaoPerfil">
+
+                👤
+
+                <span>
+                    Meu perfil
+                </span>
+
+            </button>
+
+
+            <button id="botaoFavoritos">
+
+                ⭐
+
+                <span>
+                    Favoritos (0)
+                </span>
+
+            </button>
+
+
+            <button id="botaoTema">
+
+                🌙
+
+                <span>
+                    Modo escuro
+                </span>
+
+            </button>
+
+
+            <button id="botaoConfiguracoes">
+
+                ⚙️
+
+                <span>
+                    Configurações
+                </span>
+
+            </button>
+
+
+            <button id="botaoSair">
+
+                🚪
+
+                <span>
+                    Sair
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div class="menu-rodape">
+
+            <span>
+                Swim Finder
+            </span>
+
+            <small>
+                Encontre seu próximo treino 🏊
+            </small>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ========================= -->
+    <!-- CONTEÚDO -->
+    <!-- ========================= -->
+
     <main class="container">
 
 
+        <!-- ========================= -->
+        <!-- CABEÇALHO -->
+        <!-- ========================= -->
+
         <section class="cabecalho">
 
-            <h1>🏊 Swim Finder</h1>
+            <div class="cabecalho-topo">
 
-            <p id="usuarioLogado"></p>
+                <div>
+
+                    <h1>
+                        🏊 Swim Finder
+                    </h1>
+
+                    <p id="usuarioLogado"></p>
+
+                </div>
+
+
+                <button
+                    id="botaoMenu"
+                    class="botao-menu"
+                    aria-label="Abrir menu"
+                >
+                    ☰
+                </button>
+
+            </div>
+
 
             <p>
                 Encontre piscinas para treinar perto de você.
@@ -32,14 +179,20 @@
 
         </section>
 
+
+        <!-- ========================= -->
+        <!-- BUSCA -->
+        <!-- ========================= -->
+
         <section class="busca">
+
 
             <div class="barra-pesquisa">
 
                 <div class="campo-pesquisa">
 
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         id="cidade"
                         placeholder="🔎 Digite sua cidade ou bairro"
                     >
@@ -48,8 +201,11 @@
 
                 </div>
 
+
                 <button id="botaoBuscar">
+
                     🔍 Buscar
+
                 </button>
 
             </div>
@@ -58,154 +214,307 @@
             <div class="acoes">
 
                 <button id="botaoLocalizacao">
+
                     📍 Usar minha localização
-                </button>
 
-                <button id="botaoFavoritos">
-                    ⭐ Favoritos (0)
-                </button>
-
-                <button id="botaoTema" class="botao-tema">
-                    🌙 Modo escuro
-                </button>
-
-                <button id="botaoSair">
-                    🚪 Sair
-                </button>
-
-                <button id="botaoPerfil">
-                    👤 Perfil
                 </button>
 
             </div>
 
+
         </section>
 
-      <section class="filtros">
 
-        <div class="filtro">
+        <!-- ========================= -->
+        <!-- FILTROS -->
+        <!-- ========================= -->
 
-            <label for="tipo">
-                🏊 Tipo de piscina
-            </label>
-
-            <select id="tipo">
-
-                <option value="todos">
-                    Todos
-                </option>
-
-                <option value="olimpica">
-                    Olímpica
-                </option>
-
-                <option value="semiolimpica">
-                    Semiolímpica
-                </option>
-
-                <option value="outra">
-                    Outra
-                </option>
-
-            </select>
-
-        </div>
+        <section class="filtros">
 
 
-        <div class="filtro">
+            <div class="filtro">
 
-            <label for="filtroCategoria">
-                🏢 Tipo de local
-            </label>
+                <label for="tipo">
 
-            <select id="filtroCategoria">
+                    🏊 Tipo de piscina
 
-                <option value="todos">
-                    Todos
-                </option>
-
-                <option value="publica">
-                    🏊 Piscina pública
-                </option>
-
-                <option value="academia">
-                    🏋️ Academia
-                </option>
-
-                <option value="clube">
-                    🏢 Clube
-                </option>
-
-                <option value="hotel">
-                    🏨 Hotel / Day Use
-                </option>
-
-            </select>
-
-        </div>
+                </label>
 
 
-        <div class="filtro">
+                <select id="tipo">
 
-            <label for="distanciaMax">
-                📏 Distância máxima
-            </label>
+                    <option value="todos">
+                        Todos
+                    </option>
 
-            <select id="distanciaMax">
+                    <option value="olimpica">
+                        Olímpica
+                    </option>
 
-                <option value="todos">
-                    Qualquer distância
-                </option>
+                    <option value="semiolimpica">
+                        Semiolímpica
+                    </option>
 
-                <option value="5">
-                    Até 5 km
-                </option>
+                    <option value="outra">
+                        Outra
+                    </option>
 
-                <option value="10">
-                    Até 10 km
-                </option>
+                </select>
 
-                <option value="20">
-                    Até 20 km
-                </option>
+            </div>
 
-            </select>
 
-        </div>
+            <div class="filtro">
 
-    </section>  
+                <label for="filtroCategoria">
+
+                    🏢 Tipo de local
+
+                </label>
+
+
+                <select id="filtroCategoria">
+
+                    <option value="todos">
+                        Todos
+                    </option>
+
+                    <option value="publica">
+                        🏊 Piscina pública
+                    </option>
+
+                    <option value="academia">
+                        🏋️ Academia
+                    </option>
+
+                    <option value="clube">
+                        🏢 Clube
+                    </option>
+
+                    <option value="hotel">
+                        🏨 Hotel / Day Use
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="filtro">
+
+                <label for="distanciaMax">
+
+                    📏 Distância máxima
+
+                </label>
+
+
+                <select id="distanciaMax">
+
+                    <option value="todos">
+                        Qualquer distância
+                    </option>
+
+                    <option value="5">
+                        Até 5 km
+                    </option>
+
+                    <option value="10">
+                        Até 10 km
+                    </option>
+
+                    <option value="20">
+                        Até 20 km
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MAPA -->
+        <!-- ========================= -->
 
         <section class="mapa-container">
 
-            <h2>🗺️ Piscinas próximas</h2>
+            <h2>
+                🗺️ Piscinas próximas
+            </h2>
 
             <div id="mapa"></div>
 
         </section>
-        
+
+
+        <!-- ========================= -->
+        <!-- RESULTADOS -->
+        <!-- ========================= -->
+
         <section id="resultados"></section>
+
 
     </main>
 
-    <div id="modal" class="modal" style="display: none">
+
+    <!-- ========================= -->
+    <!-- MODAL -->
+    <!-- ========================= -->
+
+    <div
+        id="modal"
+        class="modal"
+        style="display: none"
+    >
 
         <div class="modal-conteudo">
 
-            <button id="fecharModal" class="fechar-modal">
+            <button
+                id="fecharModal"
+                class="fechar-modal"
+            >
                 ✕
             </button>
+
 
             <div id="detalhesPiscina"></div>
 
         </div>
 
     </div>
-    
+
+
+    <!-- ========================= -->
+    <!-- SCRIPTS -->
+    <!-- ========================= -->
+
     <script
         src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
     </script>
-    
+
+
     <script src="/frontend/script.js"></script>
+
+
+    <!-- MENU -->
+    <script>
+
+        const botaoMenu =
+            document.querySelector("#botaoMenu");
+
+        const menuLateral =
+            document.querySelector("#menuLateral");
+
+        const menuOverlay =
+            document.querySelector("#menuOverlay");
+
+        const fecharMenu =
+            document.querySelector("#fecharMenu");
+
+
+        function abrirMenu() {
+
+            menuLateral.classList.add("aberto");
+
+            menuOverlay.classList.add("aberto");
+
+        }
+
+
+        function fecharMenuLateral() {
+
+            menuLateral.classList.remove("aberto");
+
+            menuOverlay.classList.remove("aberto");
+
+        }
+
+
+        botaoMenu.addEventListener(
+            "click",
+            abrirMenu
+        );
+
+
+        fecharMenu.addEventListener(
+            "click",
+            fecharMenuLateral
+        );
+
+
+        menuOverlay.addEventListener(
+            "click",
+            fecharMenuLateral
+        );
+
+
+        // Fecha o menu depois de escolher uma opção
+
+        document
+            .querySelectorAll(
+                "#menuLateral .menu-opcoes button"
+            )
+            .forEach(function (botao) {
+
+                botao.addEventListener(
+                    "click",
+                    function () {
+
+                        if (
+                            botao.id !==
+                            "botaoConfiguracoes"
+                        ) {
+
+                            fecharMenuLateral();
+
+                        }
+
+                    }
+                );
+
+            });
+
+
+        // Nome do usuário no menu
+
+        const nomeMenu =
+            document.querySelector("#nomeMenu");
+
+        const nomeUsuarioMenu =
+            localStorage.getItem("nomeUsuario");
+
+
+        if (
+            nomeMenu &&
+            nomeUsuarioMenu
+        ) {
+
+            nomeMenu.textContent =
+                nomeUsuarioMenu;
+
+        }
+
+
+        // Configurações
+
+        document
+            .querySelector("#botaoConfiguracoes")
+            .addEventListener(
+                "click",
+                function () {
+
+                    alert(
+                        "⚙️ Configurações estarão disponíveis em breve!"
+                    );
+
+                }
+            );
+
+    </script>
+
 
 </body>
 

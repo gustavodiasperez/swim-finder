@@ -1272,3 +1272,215 @@ body.tema-escuro .avaliacao-card {
     background: #25333d;
     color: white;
 }
+
+/* =========================
+   MENU LATERAL
+========================= */
+
+.botao-menu {
+    border: none;
+    background: transparent;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+.cabecalho-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Fundo escuro */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.25s;
+
+    z-index: 999;
+}
+
+.menu-overlay.aberto {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Menu */
+
+.menu-lateral {
+    position: fixed;
+
+    top: 0;
+    right: 0;
+
+    width: 320px;
+    max-width: 85%;
+
+    height: 100vh;
+
+    background: white;
+
+    transform: translateX(100%);
+
+    transition: transform 0.3s ease;
+
+    z-index: 1000;
+
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-lateral.aberto {
+    transform: translateX(0);
+}
+
+
+/* Cabeçalho */
+
+.menu-cabecalho {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-cabecalho h2 {
+    margin: 0;
+}
+
+.fechar-menu {
+    border: none;
+    background: transparent;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+/* Usuário */
+
+.menu-usuario {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 20px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-avatar {
+    font-size: 35px;
+}
+
+.menu-usuario div:last-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-usuario span {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+
+/* Opções */
+
+.menu-opcoes {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px;
+}
+
+.menu-opcoes button {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.menu-opcoes button:hover {
+    background: #f1f1f1;
+}
+
+.menu-opcoes button span {
+    flex: 1;
+}
+
+
+/* Rodapé */
+
+.menu-rodape {
+    margin-top: auto;
+
+    padding: 20px;
+
+    border-top: 1px solid #ddd;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    opacity: 0.7;
+}
+
+body.tema-escuro .menu-lateral {
+    background: #1b2730;
+    color: white;
+}
+
+body.tema-escuro .menu-cabecalho,
+body.tema-escuro .menu-usuario,
+body.tema-escuro .menu-rodape {
+    border-color: #40535f;
+}
+
+body.tema-escuro .menu-opcoes button {
+    color: white;
+}
+
+body.tema-escuro .menu-opcoes button:hover {
+    background: #25333d;
+}
+
+body.tema-escuro .botao-menu {
+    color: white;
+}

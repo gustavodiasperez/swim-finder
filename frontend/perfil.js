@@ -45,6 +45,41 @@ const favoritosPerfil =
 const avaliacoesPerfil =
     document.querySelector("#avaliacoesPerfil");
 
+// =========================
+// FOTO DE PERFIL
+// =========================
+
+const fotoPerfilPagina =
+    document.querySelector("#fotoPerfilPagina");
+
+const avatarPerfilPadrao =
+    document.querySelector("#avatarPerfilPadrao");
+
+const fotoPerfilSalva =
+    localStorage.getItem("fotoPerfil");
+
+
+if (fotoPerfilSalva) {
+
+    fotoPerfilPagina.src =
+        fotoPerfilSalva;
+
+    fotoPerfilPagina.style.display =
+        "block";
+
+    avatarPerfilPadrao.style.display =
+        "none";
+
+} else {
+
+    fotoPerfilPagina.style.display =
+        "none";
+
+    avatarPerfilPadrao.style.display =
+        "flex";
+
+}
+
 
 // =========================
 // DADOS DO USUÁRIO
@@ -255,34 +290,6 @@ document
         function () {
 
             window.location.href = "/app";
-
-        }
-    );
-
-
-// =========================
-// SAIR
-// =========================
-
-document
-    .querySelector("#sairPerfil")
-    .addEventListener(
-        "click",
-        function () {
-
-            localStorage.removeItem(
-                "usuarioLogado"
-            );
-
-            localStorage.removeItem(
-                "nomeUsuario"
-            );
-
-            localStorage.removeItem(
-                "emailUsuario"
-            );
-
-            window.location.href = "/login";
 
         }
     );

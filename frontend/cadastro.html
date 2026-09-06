@@ -4,92 +4,135 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Cadastro - Swim Finder</title>
+    <title>Criar conta - Swim Finder</title>
 
-    <link rel="stylesheet" href="/frontend/style.css">
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
 
 </head>
 
-<body>
+<body class="tela-autenticacao">
 
-    <main class="login-container">
+    <main class="auth-container">
 
-        <div class="login-card">
+        <div class="auth-card auth-card-cadastro">
 
-            <div class="login-logo">
+            <div class="auth-logo">
                 🏊
             </div>
 
-            <h1>Swim Finder</h1>
+            <h1>
+                Criar conta
+            </h1>
 
-            <p class="login-subtitulo">
-                Crie sua conta
+            <p class="auth-subtitulo">
+                Crie sua conta no Swim Finder.
             </p>
+
 
             <form id="formCadastro">
 
-                <label for="nome">
-                    Nome
-                </label>
 
-                <input
-                    type="text"
-                    id="nome"
-                    placeholder="Digite seu nome"
-                    required
+                <div class="campo-auth">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        placeholder="Como devemos te chamar?"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="seuemail@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Crie uma senha"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="confirmarSenha">
+                        Confirmar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        placeholder="Digite a senha novamente"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-auth"
                 >
-
-                <label for="email">
-                    E-mail
-                </label>
-
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Digite seu e-mail"
-                    required
-                >
-
-                <label for="senha">
-                    Senha
-                </label>
-
-                <input
-                    type="password"
-                    id="senha"
-                    placeholder="Crie uma senha"
-                    required
-                >
-
-                <label for="confirmarSenha">
-                    Confirmar senha
-                </label>
-
-                <input
-                    type="password"
-                    id="confirmarSenha"
-                    placeholder="Digite a senha novamente"
-                    required
-                >
-
-                <button type="submit" class="botao-login">
-                    Criar conta
+                    Criar minha conta
                 </button>
 
             </form>
 
-            <p class="criar-conta">
-                Já tem uma conta?
+
+            <div class="auth-separador">
+                <span>ou</span>
+            </div>
+
+
+            <p class="auth-link">
+
+                Já possui uma conta?
+
                 <a href="/login">
                     Entrar
                 </a>
+
             </p>
 
         </div>
 
     </main>
+
 
     <script src="/frontend/cadastro.js"></script>
 

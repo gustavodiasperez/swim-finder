@@ -19,6 +19,8 @@ const nomeUsuario = localStorage.getItem("nomeUsuario");
 const botaoPerfil = document.querySelector("#botaoPerfil");
 
 const filtroCategoria = document.querySelector("#filtroCategoria");
+const filtroOrdenacao =
+    document.querySelector("#ordenacao");
 
 if (usuarioLogado !== "true") {
     window.location.href = "/login";
@@ -252,24 +254,95 @@ botao.addEventListener("click", async function () {
 
         });
 
+        // =========================
+        // ORDENAR RESULTADOS
+        // =========================
+
         piscinasEncontradas.sort(function (a, b) {
 
-    const distanciaA = calcularDistancia(
-        minhaLocalizacao.latitude,
-        minhaLocalizacao.longitude,
-        a.latitude,
-        a.longitude
-    );
+            const ordenacao =
+                filtroOrdenacao.value;
 
-    const distanciaB = calcularDistancia(
-        minhaLocalizacao.latitude,
-        minhaLocalizacao.longitude,
-        b.latitude,
-        b.longitude
-    );
 
-    return distanciaA - distanciaB;
-});
+            // MAIS PRÓXIMAS
+
+            if (ordenacao === "distancia") {
+
+                const distanciaA =
+                    calcularDistancia(
+                        minhaLocalizacao.latitude,
+                        minhaLocalizacao.longitude,
+                        a.latitude,
+                        a.longitude
+                    );
+
+                const distanciaB =
+                    calcularDistancia(
+                        minhaLocalizacao.latitude,
+                        minhaLocalizacao.longitude,
+                        b.latitude,
+                        b.longitude
+                    );
+
+                return distanciaA - distanciaB;
+            }
+
+
+            // MELHOR AVALIADAS
+
+            if (ordenacao === "avaliacao") {
+
+                const avaliacaoA =
+                    obterAvaliacaoPiscina(a.nome);
+
+                const avaliacaoB =
+                    obterAvaliacaoPiscina(b.nome);
+
+
+                const notaA =
+                    avaliacaoA.media === null
+                        ? 0
+                        : avaliacaoA.media;
+
+                const notaB =
+                    avaliacaoB.media === null
+                        ? 0
+                        : avaliacaoB.media;
+
+
+                // Se as notas forem iguais,
+                // coloca quem tem mais avaliações primeiro
+
+                if (notaB !== notaA) {
+                    return notaB - notaA;
+                }
+
+
+                return (
+                    avaliacaoB.quantidade -
+                    avaliacaoA.quantidade
+                );
+            }
+
+
+            // NOME A-Z
+
+            if (ordenacao === "nome") {
+
+                return a.nome.localeCompare(
+                    b.nome,
+                    "pt-BR",
+                    {
+                        sensitivity: "base"
+                    }
+                );
+
+            }
+
+
+            return 0;
+
+        });
 
         atualizarMapa(piscinasEncontradas);
         
@@ -613,6 +686,15 @@ filtroDistancia.addEventListener("change", function () {
 filtroCategoria.addEventListener("change", function () {
     botao.click();
 });
+
+filtroOrdenacao.addEventListener(
+    "change",
+    function () {
+
+        botao.click();
+
+    }
+);
 
 function verificarFuncionamento(horario) {
 

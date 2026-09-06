@@ -4,11 +4,18 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Meu Perfil - Swim Finder</title>
 
-    <link rel="stylesheet" href="/frontend/style.css">
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
 
 </head>
 
@@ -16,48 +23,78 @@
 
     <main class="login-container">
 
-        <div class="foto-perfil-pagina">
+        <div class="login-card perfil-card">
 
-            <img
-                id="fotoPerfilPagina"
-                src=""
-                alt="Foto de perfil"
-            >
 
-            <span id="avatarPerfilPadrao">
-                👤
-            </span>
+            <!-- FOTO -->
 
-        </div>
+            <div class="foto-perfil-pagina">
 
-            <h1>Meu Perfil</h1>
+                <img
+                    id="fotoPerfilPagina"
+                    src=""
+                    alt="Foto de perfil"
+                >
 
-            <p id="nomePerfil"></p>
+                <span id="avatarPerfilPadrao">
+                    👤
+                </span>
 
-            <p id="emailPerfil"></p>
+            </div>
 
-            <p id="favoritosPerfil"></p>
 
-            <p id="avaliacoesPerfil">
-                ⭐ Avaliações: 0
-            </p>
+            <!-- NOME -->
+
+            <h1>
+                Meu Perfil
+            </h1>
+
+
+            <div class="dados-perfil">
+
+                <p id="nomePerfil"></p>
+
+                <p id="emailPerfil"></p>
+
+                <p id="favoritosPerfil"></p>
+
+                <p id="avaliacoesPerfil">
+                    ⭐ Avaliações: 0
+                </p>
+
+            </div>
+
 
             <hr>
 
-            <h2>📝 Minhas avaliações</h2>
+
+            <!-- AVALIAÇÕES -->
+
+            <h2 class="titulo-avaliacoes">
+                📝 Minhas avaliações
+            </h2>
+
 
             <div id="listaMinhasAvaliacoes">
+
                 Carregando avaliações...
+
             </div>
 
+
+            <!-- VOLTAR -->
 
             <div class="acoes-perfil">
 
-                <button id="voltarApp">
-                    🏊 Voltar para o Swim Finder
+                <button
+                    id="voltarApp"
+                    class="botao-voltar-perfil"
+                >
+                    ← Voltar para o Swim Finder
                 </button>
 
             </div>
+
 
         </div>
 

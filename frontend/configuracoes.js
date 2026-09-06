@@ -125,68 +125,23 @@ cardNotificacoes.addEventListener(
 
 
 // =========================
-// ABRIR CONTA
+// NAVEGAÇÃO
 // =========================
 
-cardConta.addEventListener(
-    "click",
-    function () {
+const botaoVoltar =
+    document.querySelector("#voltarConfiguracoes");
 
-        document.querySelector(
-            "#cardNotificacoes"
-        ).style.display = "none";
-
-        document.querySelector(
-            "#cardConta"
-        ).style.display = "none";
-
-        document.querySelector(
-            "#cardSobre"
-        ).style.display = "none";
-
-        areaConta.style.display = "block";
-
-    }
-);
+let telaAtual = "configuracoes";
 
 
 // =========================
-// ABRIR SOBRE
+// MOSTRAR CONFIGURAÇÕES
 // =========================
 
-cardSobre.addEventListener(
-    "click",
-    function () {
+function mostrarConfiguracoes() {
 
-        document.querySelector(
-            "#cardNotificacoes"
-        ).style.display = "none";
-
-        document.querySelector(
-            "#cardConta"
-        ).style.display = "none";
-
-        document.querySelector(
-            "#cardSobre"
-        ).style.display = "none";
-
-        areaSobre.style.display = "block";
-
-    }
-);
-
-
-// =========================
-// VOLTAR PARA CONFIGURAÇÕES
-// =========================
-
-function voltarConfiguracoes() {
-
-    areaConta.style.display =
-        "none";
-
-    areaSobre.style.display =
-        "none";
+    areaConta.style.display = "none";
+    areaSobre.style.display = "none";
 
     document.querySelector(
         "#cardNotificacoes"
@@ -200,36 +155,109 @@ function voltarConfiguracoes() {
         "#cardSobre"
     ).style.display = "flex";
 
+    botaoVoltar.textContent =
+        "← Voltar";
+
+    telaAtual = "configuracoes";
 }
 
 
-document
-    .querySelector("#voltarConfiguracoes")
-    .addEventListener(
-        "click",
-        function () {
+// =========================
+// MOSTRAR CONTA
+// =========================
+
+function mostrarConta() {
+
+    document.querySelector(
+        "#cardNotificacoes"
+    ).style.display = "none";
+
+    document.querySelector(
+        "#cardConta"
+    ).style.display = "none";
+
+    document.querySelector(
+        "#cardSobre"
+    ).style.display = "none";
+
+    areaConta.style.display = "block";
+    areaSobre.style.display = "none";
+
+    botaoVoltar.textContent =
+        "← Configurações";
+
+    telaAtual = "conta";
+}
+
+
+// =========================
+// MOSTRAR SOBRE
+// =========================
+
+function mostrarSobre() {
+
+    document.querySelector(
+        "#cardNotificacoes"
+    ).style.display = "none";
+
+    document.querySelector(
+        "#cardConta"
+    ).style.display = "none";
+
+    document.querySelector(
+        "#cardSobre"
+    ).style.display = "none";
+
+    areaConta.style.display = "none";
+    areaSobre.style.display = "block";
+
+    botaoVoltar.textContent =
+        "← Configurações";
+
+    telaAtual = "sobre";
+}
+
+
+// =========================
+// CLIQUES DOS CARDS
+// =========================
+
+cardConta.addEventListener(
+    "click",
+    mostrarConta
+);
+
+
+cardSobre.addEventListener(
+    "click",
+    mostrarSobre
+);
+
+
+// =========================
+// BOTÃO VOLTAR
+// =========================
+
+botaoVoltar.addEventListener(
+    "click",
+    function () {
+
+        if (
+            telaAtual ===
+            "configuracoes"
+        ) {
 
             window.location.href =
                 "/app";
 
+        } else {
+
+            mostrarConfiguracoes();
+
         }
-    );
 
-
-document
-    .querySelector("#voltarConfiguracoesConta")
-    .addEventListener(
-        "click",
-        voltarConfiguracoes
-    );
-
-
-document
-    .querySelector("#voltarSobre")
-    .addEventListener(
-        "click",
-        voltarConfiguracoes
-    );
+    }
+);
 
 
 // =========================

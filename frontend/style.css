@@ -2451,3 +2451,471 @@ body.tema-escuro .auth-link a {
     }
 
 }
+
+/* =========================
+   PERFIL
+========================= */
+
+.perfil-card {
+    max-width: 600px;
+    text-align: left;
+}
+
+.foto-perfil-pagina {
+    width: 110px;
+    height: 110px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e8f7fc;
+}
+
+#fotoPerfilPagina {
+    width: 110px;
+    height: 110px;
+
+    object-fit: cover;
+
+    display: none;
+}
+
+#avatarPerfilPadrao {
+    width: 110px;
+    height: 110px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 50px;
+}
+
+.perfil-card h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.dados-perfil {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    background: #f5f5f5;
+}
+
+.dados-perfil p {
+    margin: 0;
+}
+
+.titulo-avaliacoes {
+    color: #087ea4;
+
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.acoes-perfil {
+    margin-top: 25px;
+}
+
+.botao-voltar-perfil {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color: #087ea4;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-voltar-perfil:hover {
+    background: #f2f8fa;
+
+    transform: translateX(-2px);
+}
+
+
+/* MODO ESCURO */
+
+body.tema-escuro .dados-perfil {
+    background: #25333d;
+}
+
+body.tema-escuro .titulo-avaliacoes {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .botao-voltar-perfil {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .botao-voltar-perfil:hover {
+    background: #25333d;
+}
+
+/* =========================
+   CONFIGURAÇÕES - VISUAL
+========================= */
+
+.configuracoes-card {
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+}
+
+/* CARDS PRINCIPAIS */
+
+.config-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+    padding: 18px;
+
+    margin-top: 12px;
+
+    border: 1px solid #e3ecef;
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.config-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    border-color: #cfe3e9;
+}
+
+.config-icone {
+    width: 46px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #eaf8fc;
+
+    font-size: 23px;
+}
+
+.config-texto {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.config-texto strong {
+    font-size: 16px;
+    color: #1f2d33;
+}
+
+.config-texto p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #718087;
+}
+
+.config-seta {
+    font-size: 30px;
+    color: #9aabb2;
+}
+
+
+/* =========================
+   ÁREA DA CONTA
+========================= */
+
+.area-conta {
+    text-align: left;
+}
+
+.area-conta h2 {
+    margin-bottom: 20px;
+    color: #087ea4;
+}
+
+.conta-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    width: 100%;
+
+    padding: 16px;
+
+    margin-top: 10px;
+
+    border: 1px solid #e3ecef;
+    border-radius: 15px;
+
+    background: #ffffff;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.conta-clicavel,
+.conta-foto {
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.conta-clicavel:hover,
+.conta-foto:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.07);
+}
+
+.config-conta-info {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.config-conta-info strong {
+    color: #1f2d33;
+}
+
+.config-conta-info p {
+    margin: 0;
+
+    font-size: 14px;
+
+    color: #718087;
+}
+
+
+/* =========================
+   FOTO DE PERFIL
+========================= */
+
+.foto-config-container {
+    width: 60px;
+    height: 60px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf8fc;
+}
+
+.foto-perfil-preview {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    display: none;
+}
+
+.avatar-padrao {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+}
+
+
+/* =========================
+   SOBRE
+========================= */
+
+.sobre-app {
+    text-align: center;
+
+    padding: 30px 20px;
+
+    border: 1px solid #e3ecef;
+    border-radius: 16px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.sobre-logo {
+    font-size: 52px;
+}
+
+.sobre-app h3 {
+    margin: 10px 0 6px;
+
+    color: #087ea4;
+}
+
+.sobre-app p {
+    margin: 0 0 12px;
+
+    color: #718087;
+}
+
+
+/* =========================
+   BOTÃO VOLTAR
+========================= */
+
+button.botao-voltar-config {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 6px 0;
+
+    margin-bottom: 15px;
+
+    border: none !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+
+    box-shadow: none !important;
+
+    color: #087ea4;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button.botao-voltar-config:hover {
+    background: transparent !important;
+
+    color: #066580;
+
+    transform: translateX(-3px);
+}
+
+
+/* =========================
+   MODO ESCURO
+========================= */
+
+body.tema-escuro .config-card,
+body.tema-escuro .conta-item,
+body.tema-escuro .sobre-app {
+    background: #25333d;
+
+    border-color: #40535f;
+}
+
+body.tema-escuro .config-icone {
+    background: #304550;
+}
+
+body.tema-escuro .config-texto strong,
+body.tema-escuro .config-conta-info strong {
+    color: #ffffff;
+}
+
+body.tema-escuro .config-texto p,
+body.tema-escuro .config-conta-info p,
+body.tema-escuro .sobre-app p {
+    color: #c3d0d5;
+}
+
+body.tema-escuro .config-seta {
+    color: #7f969f;
+}
+
+body.tema-escuro .area-conta h2,
+body.tema-escuro .sobre-app h3 {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .foto-config-container {
+    background: #40535f;
+}
+
+body.tema-escuro button.botao-voltar-config {
+    color: #5cc8ed;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+    .configuracoes-card {
+        margin: 8px;
+    }
+
+    .config-card {
+        padding: 16px;
+    }
+
+    .conta-item {
+        padding: 15px;
+    }
+
+}
+
+.filtro-ordenacao {
+    grid-column: 1 / -1;
+}

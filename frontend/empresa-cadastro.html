@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Cadastro empresarial - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+
+</head>
+
+<body class="tela-autenticacao">
+
+    <main class="auth-container">
+
+        <div class="auth-card auth-card-cadastro-empresa">
+
+            <div class="auth-logo">
+                🏢
+            </div>
+
+            <h1>
+                Cadastro empresarial
+            </h1>
+
+            <p class="auth-subtitulo">
+                Cadastre seu estabelecimento no Swim Finder.
+            </p>
+
+
+            <form id="formCadastroEmpresa">
+
+
+                <!-- DADOS DA EMPRESA -->
+
+                <h3 class="titulo-form-empresa">
+                    🏢 Dados da empresa
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="razaoSocial">
+                        Razão social
+                    </label>
+
+                    <input
+                        type="text"
+                        id="razaoSocial"
+                        placeholder="Razão social da empresa"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="nomeFantasia">
+                        Nome do estabelecimento
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeFantasia"
+                        placeholder="Nome que aparecerá no app"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="cnpj">
+                        CNPJ
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cnpj"
+                        placeholder="00.000.000/0000-00"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="responsavel">
+                        Responsável
+                    </label>
+
+                    <input
+                        type="text"
+                        id="responsavel"
+                        placeholder="Nome do responsável"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONTATO -->
+
+                <h3 class="titulo-form-empresa">
+                    📞 Contato
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="empresa@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="telefone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone"
+                        placeholder="(11) 00000-0000"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="whatsapp">
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                        placeholder="(11) 00000-0000"
+                    >
+
+                </div>
+
+
+                <!-- REDES -->
+
+                <h3 class="titulo-form-empresa">
+                    🌐 Presença online
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="instagram">
+                        Instagram
+                    </label>
+
+                    <input
+                        type="text"
+                        id="instagram"
+                        placeholder="@seuinstagram"
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="site">
+                        Site
+                    </label>
+
+                    <input
+                        type="url"
+                        id="site"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <!-- ENDEREÇO -->
+
+                <h3 class="titulo-form-empresa">
+                    📍 Localização
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="cep">
+                        CEP
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cep"
+                        placeholder="00000-000"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="endereco">
+                        Endereço
+                    </label>
+
+                    <input
+                        type="text"
+                        id="endereco"
+                        placeholder="Rua, avenida..."
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="numero">
+                        Número
+                    </label>
+
+                    <input
+                        type="text"
+                        id="numero"
+                        placeholder="123"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="bairro">
+                        Bairro
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bairro"
+                        placeholder="Bairro"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="cidade">
+                        Cidade
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cidade"
+                        placeholder="São Paulo"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="estado">
+                        Estado
+                    </label>
+
+                    <input
+                        type="text"
+                        id="estado"
+                        placeholder="SP"
+                        maxlength="2"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ESTABELECIMENTO -->
+
+                <h3 class="titulo-form-empresa">
+                    🏊 Estabelecimento
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="categoria">
+                        Categoria
+                    </label>
+
+                    <select
+                        id="categoria"
+                        class="select-auth"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="academia">
+                            🏋️ Academia
+                        </option>
+
+                        <option value="clube">
+                            🏢 Clube
+                        </option>
+
+                        <option value="hotel">
+                            🏨 Hotel / Day Use
+                        </option>
+
+                        <option value="outro">
+                            Outro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="tipoPiscina">
+                        Tipo de piscina
+                    </label>
+
+                    <select
+                        id="tipoPiscina"
+                        class="select-auth"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione
+                        </option>
+
+                        <option value="olimpica">
+                            Olímpica
+                        </option>
+
+                        <option value="semiolimpica">
+                            Semiolímpica
+                        </option>
+
+                        <option value="outra">
+                            Outra
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="quantidadePiscinas">
+                        Quantidade de piscinas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidadePiscinas"
+                        min="1"
+                        placeholder="Ex.: 1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        class="textarea-auth"
+                        placeholder="Conte um pouco sobre seu estabelecimento..."
+                        rows="5"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- ACESSO -->
+
+                <h3 class="titulo-form-empresa">
+                    🔐 Acesso
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Crie uma senha"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="confirmarSenha">
+                        Confirmar senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmarSenha"
+                        placeholder="Digite novamente"
+                        required
+                    >
+
+                </div>
+
+
+                <label class="termos-empresa">
+
+                    <input
+                        type="checkbox"
+                        id="aceitarTermos"
+                        required
+                    >
+
+                    <span>
+                        Aceito os termos e condições do
+                        cadastro empresarial.
+                    </span>
+
+                </label>
+
+
+                <button
+                    type="submit"
+                    class="botao-auth"
+                >
+                    Enviar cadastro
+                </button>
+
+
+            </form>
+
+
+            <div class="auth-separador">
+                <span>ou</span>
+            </div>
+
+
+            <p class="auth-link">
+
+                Já possui uma conta empresarial?
+
+                <a href="/empresa/login">
+                    Entrar
+                </a>
+
+            </p>
+
+
+            <p class="auth-link">
+
+                <a href="/">
+                    ← Voltar
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="/frontend/empresa-cadastro.js"></script>
+
+</body>
+
+</html>

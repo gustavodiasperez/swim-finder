@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login empresarial - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+
+</head>
+
+<body class="tela-autenticacao">
+
+    <main class="auth-container">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+                🏢
+            </div>
+
+            <h1>
+                Área empresarial
+            </h1>
+
+            <p class="auth-subtitulo">
+                Entre na sua conta empresarial.
+            </p>
+
+
+            <form id="formLoginEmpresa">
+
+                <div class="campo-auth">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="empresa@email.com"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-auth"
+                >
+                    Entrar como empresa
+                </button>
+
+            </form>
+
+
+            <div class="auth-separador">
+                <span>ou</span>
+            </div>
+
+
+            <p class="auth-link">
+
+                Ainda não possui cadastro?
+
+                <a href="/empresa/cadastro">
+                    Cadastrar empresa
+                </a>
+
+            </p>
+
+
+            <p class="auth-link">
+
+                <a href="/">
+                    ← Voltar
+                </a>
+
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <script src="/frontend/empresa-login.js"></script>
+
+</body>
+
+</html>

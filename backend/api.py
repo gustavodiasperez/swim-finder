@@ -19,6 +19,11 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 
 PISCINAS_FILE = os.path.join(DATA_DIR, "piscinas.json")
 USUARIOS_FILE = os.path.join(DATA_DIR, "usuarios.json")
+EMPRESAS_FILE = os.path.join(
+    DATA_DIR,
+    "empresas.json"
+)
+
 AVALIACOES_FILE = os.path.join(DATA_DIR, "avaliacoes.json")
 
 
@@ -62,6 +67,32 @@ class FotoPerfil(BaseModel):
     email: str
     foto: str
 
+class Empresa(BaseModel):
+    razao_social: str
+    nome_fantasia: str
+    cnpj: str
+    responsavel: str
+    email: str
+    telefone: str
+    whatsapp: str = ""
+    instagram: str = ""
+    site: str = ""
+    cep: str
+    endereco: str
+    numero: str
+    bairro: str
+    cidade: str
+    estado: str
+    categoria: str
+    tipo_piscina: str
+    quantidade_piscinas: int
+    descricao: str
+    senha: str
+
+
+class LoginEmpresa(BaseModel):
+    email: str
+    senha: str
 
 # =========================
 # FUNÇÕES
@@ -84,6 +115,34 @@ def salvar_usuarios(usuarios):
             indent=4
         )
 
+def carregar_empresas():
+
+    if not os.path.exists(EMPRESAS_FILE):
+        return []
+
+    with open(
+        EMPRESAS_FILE,
+        "r",
+        encoding="utf-8"
+    ) as arquivo:
+
+        return json.load(arquivo)
+
+
+def salvar_empresas(empresas):
+
+    with open(
+        EMPRESAS_FILE,
+        "w",
+        encoding="utf-8"
+    ) as arquivo:
+
+        json.dump(
+            empresas,
+            arquivo,
+            ensure_ascii=False,
+            indent=4
+        )
 
 def gerar_hash(senha):
     return hashlib.sha256(
@@ -124,7 +183,7 @@ def salvar_avaliacoes(avaliacoes):
 def inicio():
     caminho = os.path.join(
         FRONTEND_DIR,
-        "login.html"
+        "tipo-conta.html"
     )
 
     return FileResponse(caminho)
@@ -139,6 +198,134 @@ def abrir_app():
 
     return FileResponse(caminho)
 
+@app.get("/tipo-conta")
+def abrir_tipo_conta():
+    caminho = os.path.join(
+        FRONTEND_DIR,
+        "tipo-conta.html"
+    )
+
+    return FileResponse(caminho)
+
+
+@app.get("/empresa/cadastro")
+def abrir_cadastro_empresa():
+
+    caminho = os.path.join(
+        FRONTEND_DIR,
+        "empresa-cadastro.html"
+    )
+
+    return FileResponse(caminho)
+
+@app.post("/empresa/cadastro")
+def cadastrar_empresa(empresa: Empresa):
+
+    empresas = carregar_empresas()
+
+    email = empresa.email.strip().lower()
+    cnpj = empresa.cnpj.strip()
+
+    for empresa_existente in empresas:
+
+        if empresa_existente["email"] == email:
+
+            return {
+                "sucesso": False,
+                "mensagem": "Este e-mail já está cadastrado."
+            }
+
+
+        if empresa_existente["cnpj"] == cnpj:
+
+            return {
+                "sucesso": False,
+                "mensagem": "Este CNPJ já está cadastrado."
+            }
+
+
+    nova_empresa = {
+
+        "razao_social":
+            empresa.razao_social.strip(),
+
+        "nome_fantasia":
+            empresa.nome_fantasia.strip(),
+
+        "cnpj":
+            cnpj,
+
+        "responsavel":
+            empresa.responsavel.strip(),
+
+        "email":
+            email,
+
+        "telefone":
+            empresa.telefone.strip(),
+
+        "whatsapp":
+            empresa.whatsapp.strip(),
+
+        "instagram":
+            empresa.instagram.strip(),
+
+        "site":
+            empresa.site.strip(),
+
+        "cep":
+            empresa.cep.strip(),
+
+        "endereco":
+            empresa.endereco.strip(),
+
+        "numero":
+            empresa.numero.strip(),
+
+        "bairro":
+            empresa.bairro.strip(),
+
+        "cidade":
+            empresa.cidade.strip(),
+
+        "estado":
+            empresa.estado.strip().upper(),
+
+        "categoria":
+            empresa.categoria,
+
+        "tipo_piscina":
+            empresa.tipo_piscina,
+
+        "quantidade_piscinas":
+            empresa.quantidade_piscinas,
+
+        "descricao":
+            empresa.descricao.strip(),
+
+        "senha":
+            gerar_hash(empresa.senha),
+
+        "status":
+            "em_analise"
+
+    }
+
+
+    empresas.append(
+        nova_empresa
+    )
+
+    salvar_empresas(
+        empresas
+    )
+
+
+    return {
+        "sucesso": True,
+        "mensagem":
+            "Cadastro enviado para análise."
+    }
 
 @app.get("/login")
 def abrir_login():
@@ -148,6 +335,59 @@ def abrir_login():
     )
 
     return FileResponse(caminho)
+
+@app.get("/empresa/login")
+def abrir_login_empresa():
+
+    caminho = os.path.join(
+        FRONTEND_DIR,
+        "empresa-login.html"
+    )
+
+    return FileResponse(caminho)
+
+@app.post("/empresa/login")
+def fazer_login_empresa(dados: LoginEmpresa):
+
+    empresas = carregar_empresas()
+
+    email = dados.email.strip().lower()
+    senha_hash = gerar_hash(
+        dados.senha
+    )
+
+
+    for empresa in empresas:
+
+        if (
+            empresa["email"] == email
+            and
+            empresa["senha"] == senha_hash
+        ):
+
+            if empresa["status"] != "aprovada":
+
+                return {
+                    "sucesso": False,
+                    "mensagem":
+                        "Seu cadastro ainda está em análise."
+                }
+
+
+            return {
+                "sucesso": True,
+                "nome":
+                    empresa["nome_fantasia"],
+                "mensagem":
+                    "Login realizado com sucesso."
+            }
+
+
+    return {
+        "sucesso": False,
+        "mensagem":
+            "E-mail ou senha incorretos."
+    }
 
 @app.get("/cadastro")
 def abrir_cadastro():
@@ -425,6 +665,20 @@ def abrir_perfil():
     caminho = os.path.join(
         FRONTEND_DIR,
         "perfil.html"
+    )
+
+    return FileResponse(caminho)
+
+# =========================
+# PAINEL EMPRESARIAL
+# =========================
+
+@app.get("/empresa/painel")
+def abrir_painel_empresa():
+
+    caminho = os.path.join(
+        FRONTEND_DIR,
+        "empresa-painel.html"
     )
 
     return FileResponse(caminho)

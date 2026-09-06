@@ -299,29 +299,75 @@ botao.addEventListener("click", async function () {
                     obterAvaliacaoPiscina(b.nome);
 
 
-                const notaA =
-                    avaliacaoA.media === null
-                        ? 0
-                        : avaliacaoA.media;
+                // Média geral de todas as avaliações
 
-                const notaB =
-                    avaliacaoB.media === null
-                        ? 0
-                        : avaliacaoB.media;
+                const avaliacoesValidas =
+                    todasAvaliacoes.filter(function (avaliacao) {
+
+                        return Number.isFinite(
+                            Number(avaliacao.nota)
+                        );
+
+                    });
 
 
-                // Se as notas forem iguais,
-                // coloca quem tem mais avaliações primeiro
+                let mediaGeral = 0;
 
-                if (notaB !== notaA) {
-                    return notaB - notaA;
+                if (avaliacoesValidas.length > 0) {
+
+                    const soma =
+                        avaliacoesValidas.reduce(
+                            function (total, avaliacao) {
+
+                                return total +
+                                    Number(avaliacao.nota);
+
+                            },
+                            0
+                        );
+
+                    mediaGeral =
+                        soma / avaliacoesValidas.length;
+
                 }
 
 
-                return (
-                    avaliacaoB.quantidade -
-                    avaliacaoA.quantidade
-                );
+                // Quantidade mínima usada para dar confiança
+
+                const minimoAvaliacoes = 5;
+
+
+                function calcularScore(avaliacao) {
+
+                    if (avaliacao.quantidade === 0) {
+                        return 0;
+                    }
+
+                    const R = avaliacao.media;
+                    const n = avaliacao.quantidade;
+                    const m = minimoAvaliacoes;
+                    const C = mediaGeral;
+
+
+                    return (
+                        (n / (n + m)) * R
+                    ) +
+                    (
+                        (m / (n + m)) * C
+                    );
+
+                }
+
+
+                const scoreA =
+                    calcularScore(avaliacaoA);
+
+                const scoreB =
+                    calcularScore(avaliacaoB);
+
+
+                return scoreB - scoreA;
+
             }
 
 
@@ -342,7 +388,7 @@ botao.addEventListener("click", async function () {
 
             return 0;
 
-        });
+            });
 
         atualizarMapa(piscinasEncontradas);
         

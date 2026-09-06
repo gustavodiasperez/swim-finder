@@ -2919,3 +2919,278 @@ body.tema-escuro button.botao-voltar-config {
 .filtro-ordenacao {
     grid-column: 1 / -1;
 }
+
+/* =========================
+   ESCOLHA DO TIPO DE CONTA
+========================= */
+
+.escolha-conta-card {
+    max-width: 520px;
+}
+
+.opcoes-conta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.card-tipo-conta {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 18px;
+
+    border: 1px solid #e3ecef;
+    border-radius: 16px;
+
+    background: white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0, 0, 0, 0.04);
+}
+
+.card-tipo-conta:hover {
+    transform: translateY(-2px);
+
+    border-color: #c9e2ea;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0, 0, 0, 0.08);
+}
+
+.icone-tipo-conta {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #eaf8fc;
+
+    font-size: 25px;
+}
+
+.texto-tipo-conta {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.texto-tipo-conta strong {
+    color: #1f2d33;
+    font-size: 16px;
+}
+
+.texto-tipo-conta span {
+    color: #718087;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.seta-tipo-conta {
+    font-size: 30px;
+    color: #9aabb2;
+}
+
+
+/* MODO ESCURO */
+
+body.tema-escuro .card-tipo-conta {
+    background: #25333d;
+    border-color: #40535f;
+}
+
+body.tema-escuro .icone-tipo-conta {
+    background: #304550;
+}
+
+body.tema-escuro .texto-tipo-conta strong {
+    color: white;
+}
+
+body.tema-escuro .texto-tipo-conta span {
+    color: #c3d0d5;
+}
+
+body.tema-escuro .seta-tipo-conta {
+    color: #7f969f;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    .escolha-conta-card {
+        margin: 8px;
+    }
+
+    .card-tipo-conta {
+        padding: 15px;
+    }
+
+}
+
+/* =========================
+   PAINEL EMPRESARIAL
+========================= */
+
+.painel-empresa {
+    max-width: 700px;
+}
+
+.painel-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.painel-logo {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #eaf8fc;
+
+    font-size: 35px;
+}
+
+.painel-cabecalho h1 {
+    margin: 0;
+    color: #087ea4;
+}
+
+.painel-cabecalho p {
+    margin: 5px 0 0;
+    color: #718087;
+}
+
+.status-empresa {
+    padding: 13px 16px;
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    background: #eaf8ef;
+    color: #16834b;
+
+    font-weight: bold;
+}
+
+.painel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.painel-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 5px;
+
+    padding: 18px;
+
+    min-height: 130px;
+
+    border: 1px solid #e3ecef;
+    border-radius: 16px;
+
+    background: white;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.painel-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.08);
+
+    border-color: #c9e2ea;
+}
+
+.painel-card span {
+    font-size: 28px;
+}
+
+.painel-card strong {
+    color: #1f2d33;
+    font-size: 16px;
+}
+
+.painel-card small {
+    color: #718087;
+    font-size: 13px;
+}
+
+
+/* MODO ESCURO */
+
+body.tema-escuro .painel-logo {
+    background: #304550;
+}
+
+body.tema-escuro .painel-cabecalho h1 {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .painel-cabecalho p {
+    color: #c3d0d5;
+}
+
+body.tema-escuro .painel-card {
+    background: #25333d;
+    border-color: #40535f;
+}
+
+body.tema-escuro .painel-card strong {
+    color: white;
+}
+
+body.tema-escuro .painel-card small {
+    color: #c3d0d5;
+}
+
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    .painel-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

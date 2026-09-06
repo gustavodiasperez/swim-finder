@@ -43,9 +43,17 @@
 
         <div class="menu-usuario">
 
-            <div class="menu-avatar">
+            <img
+                id="fotoPerfilMenu"
+                class="foto-perfil-menu"
+                src=""
+                alt="Foto de perfil"
+            >
+
+            <span id="avatarMenuPadrao">
                 👤
-            </div>
+            </span>
+        </div>
 
             <div>
 
@@ -496,6 +504,41 @@
                 nomeUsuarioMenu;
 
         }
+
+        // =========================
+// FOTO DE PERFIL NO MENU
+// =========================
+
+const fotoPerfilMenu =
+    document.querySelector("#fotoPerfilMenu");
+
+const avatarMenuPadrao =
+    document.querySelector("#avatarMenuPadrao");
+
+const fotoPerfilSalva =
+    localStorage.getItem("fotoPerfil");
+
+
+if (fotoPerfilSalva) {
+
+    fotoPerfilMenu.src =
+        fotoPerfilSalva;
+
+    fotoPerfilMenu.style.display =
+        "block";
+
+    avatarMenuPadrao.style.display =
+        "none";
+
+} else {
+
+    fotoPerfilMenu.style.display =
+        "none";
+
+    avatarMenuPadrao.style.display =
+        "flex";
+
+}
 
 
         // Configurações

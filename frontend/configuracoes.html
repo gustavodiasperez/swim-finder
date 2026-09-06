@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Configurações - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <div class="login-card configuracoes-card">
+
+            <button
+                id="voltarConfiguracoes"
+                class="botao-voltar-config"
+            >
+                ← Voltar
+            </button>
+
+
+            <div class="login-logo">
+                ⚙️
+            </div>
+
+
+            <h1>
+                Configurações
+            </h1>
+
+
+            <!-- ========================= -->
+            <!-- NOTIFICAÇÕES -->
+            <!-- ========================= -->
+
+            <section class="configuracao-secao">
+
+                <h2>
+                    🔔 Notificações
+                </h2>
+
+                <div class="configuracao-item">
+
+                    <div>
+
+                        <strong>
+                            Notificações
+                        </strong>
+
+                        <p>
+                            Receba novidades e atualizações
+                            do Swim Finder.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="botaoNotificacoes"
+                        class="botao-config"
+                    >
+                        🔕 Desativadas
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ========================= -->
+            <!-- CONTA -->
+            <!-- ========================= -->
+
+            <section class="configuracao-secao">
+
+                <h2>
+                    👤 Conta
+                </h2>
+
+
+                <!-- NOME -->
+
+                <div class="configuracao-conta">
+
+                    <span class="icone-config">
+                        👤
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Nome de usuário
+                        </strong>
+
+                        <p id="nomeUsuarioConfig">
+                            Carregando...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOTO -->
+
+                <div class="configuracao-conta">
+
+                    <div class="foto-config-container">
+
+                        <img
+                            id="fotoPerfilPreview"
+                            class="foto-perfil-preview"
+                            src=""
+                            alt="Foto de perfil"
+                        >
+
+                        <span
+                            id="avatarPadrao"
+                            class="avatar-padrao"
+                        >
+                            👤
+                        </span>
+
+                    </div>
+
+
+                    <div class="config-conta-info">
+
+                        <strong>
+                            Foto de perfil
+                        </strong>
+
+                        <p>
+                            Escolha uma foto para seu perfil.
+                        </p>
+
+                        <input
+                            type="file"
+                            id="fotoPerfil"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <button
+                            id="botaoFotoPerfil"
+                            class="botao-config"
+                        >
+                            📷 Alterar foto
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="configuracao-conta">
+
+                    <span class="icone-config">
+                        📧
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            E-mail cadastrado
+                        </strong>
+
+                        <p id="emailUsuarioConfig">
+                            Carregando...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SENHA -->
+
+                <div class="configuracao-conta">
+
+                    <span class="icone-config">
+                        🔒
+                    </span>
+
+                    <div class="config-conta-info">
+
+                        <strong>
+                            Senha
+                        </strong>
+
+                        <p>
+                            Altere sua senha de acesso.
+                        </p>
+
+                        <button
+                            id="botaoAlterarSenha"
+                            class="botao-config"
+                        >
+                            🔒 Alterar senha
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ========================= -->
+            <!-- SOBRE -->
+            <!-- ========================= -->
+
+            <section class="configuracao-secao">
+
+                <h2>
+                    ℹ️ Sobre
+                </h2>
+
+
+                <div class="configuracao-sobre">
+
+                    <strong>
+                        🏊 Swim Finder
+                    </strong>
+
+                    <span>
+                        Versão 1.0
+                    </span>
+
+                    <small>
+                        Encontre seu próximo treino.
+                    </small>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="/frontend/configuracoes.js"></script>
+
+</body>
+
+</html>

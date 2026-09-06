@@ -47,6 +47,11 @@ class Login(BaseModel):
     email: str
     senha: str
 
+class AlterarSenha(BaseModel):
+    email: str
+    senha_atual: str
+    nova_senha: str
+
 class Avaliacao(BaseModel):
     piscina: str
     nome_usuario: str
@@ -217,6 +222,62 @@ def adicionar_avaliacao(avaliacao: Avaliacao):
         "mensagem": "Avaliação adicionada com sucesso!"
     }
 
+@app.get("/configuracoes")
+def abrir_configuracoes():
+    caminho = os.path.join(
+        FRONTEND_DIR,
+        "configuracoes.html"
+    )
+    return FileResponse(caminho)
+
+@app.post("/alterar-senha")
+def alterar_senha(dados: AlterarSenha):
+    usuarios = carregar_usuarios()
+
+    email = dados.email.strip().lower()
+
+    senha_atual_hash = gerar_hash(dados.senha_atual)
+
+    for usuario in usuarios:
+
+        if usuario["email"] != email:
+            continue
+
+        # Verifica a senha atual
+        if usuario["senha"] != senha_atual_hash:
+            return {
+                "sucesso": False,
+                "mensagem": "A senha atual está incorreta."
+            }
+
+        # Verifica se a nova senha tem tamanho mínimo
+        if len(dados.nova_senha) < 6:
+            return {
+                "sucesso": False,
+                "mensagem": "A nova senha deve ter pelo menos 6 caracteres."
+            }
+
+        # Impede trocar pela mesma senha
+        if dados.senha_atual == dados.nova_senha:
+            return {
+                "sucesso": False,
+                "mensagem": "A nova senha precisa ser diferente da atual."
+            }
+
+        # Salva a nova senha com hash
+        usuario["senha"] = gerar_hash(dados.nova_senha)
+
+        salvar_usuarios(usuarios)
+
+        return {
+            "sucesso": True,
+            "mensagem": "Senha alterada com sucesso!"
+        }
+
+    return {
+        "sucesso": False,
+        "mensagem": "Usuário não encontrado."
+    }
 # =========================
 # CADASTRO
 # =========================

@@ -393,3 +393,101 @@ formCadastroEmpresa.addEventListener(
         }
     }
 );
+
+// =========================
+// FORÇA DA SENHA
+// =========================
+
+const campoSenha =
+    document.querySelector("#senha");
+
+const indicadorForca =
+    document.querySelector("#forcaSenha");
+
+function verificarForcaSenha(senha) {
+
+    if (!indicadorForca) {
+        return;
+    }
+
+    indicadorForca.classList.remove(
+        "forca-fraca",
+        "forca-media",
+        "forca-forte"
+    );
+
+    const texto =
+        indicadorForca.querySelector(
+            ".texto-forca"
+        );
+
+    if (!senha) {
+        texto.textContent = "";
+        return;
+    }
+
+    let pontos = 0;
+
+    if (senha.length >= 6) {
+        pontos++;
+    }
+
+    if (senha.length >= 10) {
+        pontos++;
+    }
+
+    if (/[A-Z]/.test(senha)) {
+        pontos++;
+    }
+
+    if (/[a-z]/.test(senha)) {
+        pontos++;
+    }
+
+    if (/[0-9]/.test(senha)) {
+        pontos++;
+    }
+
+    if (/[^A-Za-z0-9]/.test(senha)) {
+        pontos++;
+    }
+
+    if (pontos <= 2) {
+
+        indicadorForca.classList.add(
+            "forca-fraca"
+        );
+
+        texto.textContent =
+            "Fraca";
+
+    } else if (pontos <= 4) {
+
+        indicadorForca.classList.add(
+            "forca-media"
+        );
+
+        texto.textContent =
+            "Média";
+
+    } else {
+
+        indicadorForca.classList.add(
+            "forca-forte"
+        );
+
+        texto.textContent =
+            "Forte";
+    }
+}
+
+if (campoSenha) {
+    campoSenha.addEventListener(
+        "input",
+        function () {
+            verificarForcaSenha(
+                campoSenha.value
+            );
+        }
+    );
+}

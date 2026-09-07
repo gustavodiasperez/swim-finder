@@ -3790,3 +3790,70 @@ body.tema-escuro .miniatura-detalhes.miniatura-ativa {
 .seta-galeria.direita {
     right: 14px;
 }
+
+/* =========================
+   FORÇA DA SENHA
+   ========================= */
+
+.forca-senha {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.barras-forca {
+    display: flex !important;
+    width: 100%;
+    gap: 7px;
+    margin-top: 5px;
+}
+
+.barras-forca span {
+    display: block !important;
+    width: 100%;
+    height: 8px !important;
+    min-height: 8px;
+    flex: 1;
+    background: #dfe5e8;
+    border-radius: 2px;
+}
+
+/* FRACA */
+
+.forca-fraca .barras-forca span:nth-child(1) {
+    background: #ef4b23;
+}
+
+/* MÉDIA */
+
+.forca-media .barras-forca span:nth-child(1),
+.forca-media .barras-forca span:nth-child(2) {
+    background: #f2c900;
+}
+
+/* FORTE */
+
+.forca-forte .barras-forca span:nth-child(1),
+.forca-forte .barras-forca span:nth-child(2),
+.forca-forte .barras-forca span:nth-child(3) {
+    background: #39b51f;
+}
+
+.texto-forca {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.forca-fraca .texto-forca {
+    color: #ef4b23;
+}
+
+.forca-media .texto-forca {
+    color: #d4ad00;
+}
+
+.forca-forte .texto-forca {
+    color: #39a51b;
+}

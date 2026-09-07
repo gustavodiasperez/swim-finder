@@ -145,6 +145,7 @@ class LoginEmpresa(BaseModel):
 class AtualizarEmpresa(BaseModel):
     razao_social: str
     nome_fantasia: str
+    piscina_nome: str
     cnpj: str
     responsavel: str
 
@@ -877,6 +878,18 @@ def cadastrar_empresa(
 
             }
 
+        for empresa_existente in empresas:
+            if (
+                empresa_existente.get("piscina_nome", "").strip().lower()
+                == empresa.piscina_nome.strip().lower()
+                and empresa.piscina_nome.strip()
+            ):
+                return {
+                    "sucesso": False,
+                    "mensagem": "Esta piscina já esta vinculada a outra empresa."
+                }
+
+
     nova_empresa = {
 
         "razao_social":
@@ -1099,6 +1112,10 @@ def atualizar_empresa(
             dados.nome_fantasia.strip()
         )
 
+        empresa["piscina_nome"] = (
+            dados.piscina_nome.strip()
+        )
+
         empresa["cnpj"] = (
             dados.cnpj.strip()
         )
@@ -1162,6 +1179,20 @@ def atualizar_empresa(
         empresa["descricao"] = (
             dados.descricao.strip()
         )
+
+        for empresa_existente in empresas:
+            if empresa_existente["email"] == email:
+                continue
+
+            if (
+                empresa_existente.get("piscina_nome", "").strip().lower()
+                == dados.piscina_nome.strip().lower()
+                and dados.piscina_nome.strip()
+            ):
+                return {
+                    "sucesso": False,
+                    "mensagem": "Esta piscina já está vinculada a outra empresa."
+                }
 
         salvar_empresas(
             empresas

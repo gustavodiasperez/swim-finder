@@ -1,23 +1,77 @@
 const empresaEmail =
     localStorage.getItem("empresaEmail");
 
-
 if (!empresaEmail) {
-
-    window.location.href =
-        "/empresa/login";
-
+    window.location.href = "/empresa/login";
 }
 
-
 const formEditarEmpresa =
-    document.querySelector(
-        "#formEditarEmpresa"
-    );
+    document.querySelector("#formEditarEmpresa");
 
+const piscinaNome =
+    document.querySelector("#piscinaNome");
 
 // =========================
-// CARREGAR DADOS
+// CARREGAR PISCINAS
+// =========================
+
+async function carregarPiscinas(empresaAtual) {
+    try {
+        const resposta =
+            await fetch("/piscinas");
+
+        if (!resposta.ok) {
+            throw new Error(
+                "Erro ao carregar piscinas."
+            );
+        }
+
+        const piscinas =
+            await resposta.json();
+
+        piscinaNome.innerHTML = `
+            <option value="">
+                Selecione a piscina
+            </option>
+        `;
+
+        piscinas.forEach(function (piscina) {
+
+            const opcao =
+                document.createElement("option");
+
+            opcao.value =
+                piscina.nome;
+
+            opcao.textContent =
+                piscina.nome;
+
+            piscinaNome.appendChild(opcao);
+        });
+
+        // Seleciona a piscina que a empresa já possui
+        if (empresaAtual.piscina_nome) {
+            piscinaNome.value =
+                empresaAtual.piscina_nome;
+        }
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar piscinas:",
+            erro
+        );
+
+        piscinaNome.innerHTML = `
+            <option value="">
+                Erro ao carregar piscinas
+            </option>
+        `;
+    }
+}
+
+// =========================
+// CARREGAR DADOS DA EMPRESA
 // =========================
 
 async function carregarEmpresa() {
@@ -30,20 +84,15 @@ async function carregarEmpresa() {
                 encodeURIComponent(empresaEmail)
             );
 
-
         if (!resposta.ok) {
-
             throw new Error(
                 "Erro HTTP: " +
                 resposta.status
             );
-
         }
-
 
         const empresa =
             await resposta.json();
-
 
         if (!empresa.sucesso) {
 
@@ -53,59 +102,91 @@ async function carregarEmpresa() {
             );
 
             return;
-
         }
 
-
-        document.querySelector("#razaoSocial").value =
+        document.querySelector(
+            "#razaoSocial"
+        ).value =
             empresa.razao_social || "";
 
-        document.querySelector("#nomeFantasia").value =
+        document.querySelector(
+            "#nomeFantasia"
+        ).value =
             empresa.nome_fantasia || "";
 
-        document.querySelector("#cnpj").value =
+        document.querySelector(
+            "#cnpj"
+        ).value =
             empresa.cnpj || "";
 
-        document.querySelector("#responsavel").value =
+        document.querySelector(
+            "#responsavel"
+        ).value =
             empresa.responsavel || "";
 
-        document.querySelector("#email").value =
+        document.querySelector(
+            "#email"
+        ).value =
             empresa.email || "";
 
-        document.querySelector("#telefone").value =
+        document.querySelector(
+            "#telefone"
+        ).value =
             empresa.telefone || "";
 
-        document.querySelector("#whatsapp").value =
+        document.querySelector(
+            "#whatsapp"
+        ).value =
             empresa.whatsapp || "";
 
-        document.querySelector("#instagram").value =
+        document.querySelector(
+            "#instagram"
+        ).value =
             empresa.instagram || "";
 
-        document.querySelector("#site").value =
+        document.querySelector(
+            "#site"
+        ).value =
             empresa.site || "";
 
-        document.querySelector("#cep").value =
+        document.querySelector(
+            "#cep"
+        ).value =
             empresa.cep || "";
 
-        document.querySelector("#endereco").value =
+        document.querySelector(
+            "#endereco"
+        ).value =
             empresa.endereco || "";
 
-        document.querySelector("#numero").value =
+        document.querySelector(
+            "#numero"
+        ).value =
             empresa.numero || "";
 
-        document.querySelector("#bairro").value =
+        document.querySelector(
+            "#bairro"
+        ).value =
             empresa.bairro || "";
 
-        document.querySelector("#cidade").value =
+        document.querySelector(
+            "#cidade"
+        ).value =
             empresa.cidade || "";
 
-        document.querySelector("#estado").value =
+        document.querySelector(
+            "#estado"
+        ).value =
             empresa.estado || "";
 
-        document.querySelector("#categoria").value =
+        document.querySelector(
+            "#categoria"
+        ).value =
             empresa.categoria || "";
 
-        document.querySelector("#tipoPiscina").value =
+        document.querySelector(
+            "#tipoPiscina"
+        ).value =
             empresa.tipo_piscina || "";
 
         document.querySelector(
@@ -113,9 +194,13 @@ async function carregarEmpresa() {
         ).value =
             empresa.quantidade_piscinas || 1;
 
-        document.querySelector("#descricao").value =
+        document.querySelector(
+            "#descricao"
+        ).value =
             empresa.descricao || "";
 
+        // Carrega a lista depois dos dados da empresa
+        await carregarPiscinas(empresa);
 
     } catch (erro) {
 
@@ -124,14 +209,10 @@ async function carregarEmpresa() {
         alert(
             "❌ Não foi possível carregar os dados da empresa."
         );
-
     }
-
 }
 
-
 carregarEmpresa();
-
 
 // =========================
 // SALVAR
@@ -142,7 +223,6 @@ formEditarEmpresa.addEventListener(
     async function (evento) {
 
         evento.preventDefault();
-
 
         const dados = {
 
@@ -155,6 +235,11 @@ formEditarEmpresa.addEventListener(
                 document.querySelector(
                     "#nomeFantasia"
                 ).value.trim(),
+
+            piscina_nome:
+                document.querySelector(
+                    "#piscinaNome"
+                ).value,
 
             cnpj:
                 document.querySelector(
@@ -237,9 +322,7 @@ formEditarEmpresa.addEventListener(
                 document.querySelector(
                     "#descricao"
                 ).value.trim()
-
         };
-
 
         try {
 
@@ -259,14 +342,11 @@ formEditarEmpresa.addEventListener(
 
                         body:
                             JSON.stringify(dados)
-
                     }
                 );
 
-
             const resultado =
                 await resposta.json();
-
 
             if (resultado.sucesso) {
 
@@ -288,9 +368,7 @@ formEditarEmpresa.addEventListener(
                     "❌ " +
                     resultado.mensagem
                 );
-
             }
-
 
         } catch (erro) {
 
@@ -299,12 +377,9 @@ formEditarEmpresa.addEventListener(
             alert(
                 "❌ Erro ao salvar as alterações."
             );
-
         }
-
     }
 );
-
 
 // =========================
 // VOLTAR
@@ -318,6 +393,5 @@ document
 
             window.location.href =
                 "/empresa/painel";
-
         }
     );

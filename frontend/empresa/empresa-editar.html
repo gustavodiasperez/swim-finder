@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Editar empresa - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+
+</head>
+
+<body class="tela-autenticacao">
+
+    <main class="auth-container">
+
+        <div class="auth-card auth-card-cadastro-empresa">
+
+            <button
+                id="voltarPainel"
+                class="botao-empresa-secundario"
+            >
+                ← Voltar
+            </button>
+
+
+            <div class="auth-logo">
+                🏢
+            </div>
+
+            <h1>
+                Editar estabelecimento
+            </h1>
+
+            <p class="auth-subtitulo">
+                Atualize as informações do seu estabelecimento.
+            </p>
+
+
+            <form id="formEditarEmpresa">
+
+
+                <h3 class="titulo-form-empresa">
+                    🏢 Dados da empresa
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="razaoSocial">
+                        Razão social
+                    </label>
+
+                    <input
+                        type="text"
+                        id="razaoSocial"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="nomeFantasia">
+                        Nome do estabelecimento
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nomeFantasia"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="cnpj">
+                        CNPJ
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cnpj"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="responsavel">
+                        Responsável
+                    </label>
+
+                    <input
+                        type="text"
+                        id="responsavel"
+                        required
+                    >
+
+                </div>
+
+
+                <h3 class="titulo-form-empresa">
+                    📞 Contato
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        readonly
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="telefone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="whatsapp">
+                        WhatsApp
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="whatsapp"
+                    >
+
+                </div>
+
+
+                <h3 class="titulo-form-empresa">
+                    🌐 Presença online
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="instagram">
+                        Instagram
+                    </label>
+
+                    <input
+                        type="text"
+                        id="instagram"
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="site">
+                        Site
+                    </label>
+
+                    <input
+                        type="url"
+                        id="site"
+                    >
+
+                </div>
+
+
+                <h3 class="titulo-form-empresa">
+                    📍 Localização
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="cep">
+                        CEP
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cep"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="endereco">
+                        Endereço
+                    </label>
+
+                    <input
+                        type="text"
+                        id="endereco"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="numero">
+                        Número
+                    </label>
+
+                    <input
+                        type="text"
+                        id="numero"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="bairro">
+                        Bairro
+                    </label>
+
+                    <input
+                        type="text"
+                        id="bairro"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="cidade">
+                        Cidade
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cidade"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="estado">
+                        Estado
+                    </label>
+
+                    <input
+                        type="text"
+                        id="estado"
+                        maxlength="2"
+                        required
+                    >
+
+                </div>
+
+
+                <h3 class="titulo-form-empresa">
+                    🏊 Estabelecimento
+                </h3>
+
+
+                <div class="campo-auth">
+
+                    <label for="categoria">
+                        Categoria
+                    </label>
+
+                    <select
+                        id="categoria"
+                        class="select-auth"
+                        required
+                    >
+
+                        <option value="academia">
+                            🏋️ Academia
+                        </option>
+
+                        <option value="clube">
+                            🏢 Clube
+                        </option>
+
+                        <option value="hotel">
+                            🏨 Hotel / Day Use
+                        </option>
+
+                        <option value="outro">
+                            Outro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="tipoPiscina">
+                        Tipo de piscina
+                    </label>
+
+                    <select
+                        id="tipoPiscina"
+                        class="select-auth"
+                        required
+                    >
+
+                        <option value="olimpica">
+                            Olímpica
+                        </option>
+
+                        <option value="semiolimpica">
+                            Semiolímpica
+                        </option>
+
+                        <option value="outra">
+                            Outra
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="quantidadePiscinas">
+                        Quantidade de piscinas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidadePiscinas"
+                        min="1"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo-auth">
+
+                    <label for="descricao">
+                        Descrição
+                    </label>
+
+                    <textarea
+                        id="descricao"
+                        class="textarea-auth"
+                        rows="5"
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="botao-empresa-principal"
+                >
+                    Salvar alterações
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script src="/frontend/empresa/empresa-editar.js"></script>
+
+</body>
+
+</html>

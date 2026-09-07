@@ -2010,37 +2010,6 @@ body.tema-escuro .botao-voltar {
     color: #5cc8ed;
 }
 
-#voltarApp {
-    display: inline-flex !important;
-    align-items: center !important;
-
-    margin-bottom: 20px !important;
-    padding: 8px 0 !important;
-
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-
-    color: #087ea4 !important;
-
-    font-size: 15px !important;
-    font-weight: bold !important;
-
-    cursor: pointer !important;
-}
-
-#voltarApp:hover {
-    background: transparent !important;
-    color: #066580 !important;
-    transform: translateX(-3px) !important;
-}
-
-body.tema-escuro #voltarApp {
-    background: transparent !important;
-    color: #5cc8ed !important;
-}
-
 /* VOLTAR DAS CONFIGURAÇÕES */
 
 button.botao-voltar-config {
@@ -3193,4 +3162,533 @@ body.tema-escuro .painel-card small {
         grid-template-columns: 1fr;
     }
 
+}
+
+/* =========================================
+   FOTOS DA EMPRESA
+========================================= */
+
+.preview-fotos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.preview-foto {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid #dcebef;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    transition: 0.2s;
+}
+
+.preview-foto:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Campo de escolher arquivos */
+
+#inputFotos {
+    width: 100%;
+    padding: 14px;
+    border: 2px dashed #b9dce8;
+    border-radius: 14px;
+    background: #f5fbfd;
+    color: #444;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#inputFotos:hover {
+    border-color: #087ea4;
+    background: #eef9fc;
+}
+
+/* Botão salvar */
+
+#botaoSalvarFotos {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #087ea4;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#botaoSalvarFotos:hover {
+    background: #066580;
+    transform: translateY(-1px);
+}
+
+/* MODO ESCURO */
+
+body.tema-escuro #inputFotos {
+    background: #25333d;
+    color: white;
+    border-color: #40535f;
+}
+
+body.tema-escuro .preview-foto {
+    border-color: #40535f;
+}
+
+body.tema-escuro #botaoSalvarFotos {
+    background: #087ea4;
+}
+
+body.tema-escuro #botaoSalvarFotos:hover {
+    background: #066580;
+}
+
+/* CELULAR */
+
+@media (max-width: 700px) {
+
+    .preview-fotos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .preview-foto {
+        height: 130px;
+    }
+
+}
+
+/* =========================================
+   HORÁRIOS DA EMPRESA
+========================================= */
+
+.horarios-empresa {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.campo-horario {
+    background: #f5fbfd;
+    padding: 16px;
+    border-radius: 14px;
+    border: 1px solid #dcebef;
+}
+
+.campo-horario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #087ea4;
+}
+
+.campo-horario input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #dce7eb;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.campo-horario input:focus {
+    border-color: #087ea4;
+}
+
+/* BOTÃO SALVAR */
+
+#botaoSalvarHorarios {
+    width: 100%;
+    margin-top: 5px;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #087ea4;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#botaoSalvarHorarios:hover {
+    background: #066580;
+    transform: translateY(-1px);
+}
+
+/* MODO ESCURO */
+
+body.tema-escuro .campo-horario {
+    background: #25333d;
+    border-color: #40535f;
+}
+
+body.tema-escuro .campo-horario label {
+    color: #5cc8ed;
+}
+
+body.tema-escuro .campo-horario input {
+    background: #1b2730;
+    color: white;
+    border-color: #40535f;
+}
+
+body.tema-escuro .campo-horario input::placeholder {
+    color: #aebbc2;
+}
+
+/* CELULAR */
+
+@media (max-width: 700px) {
+
+    .horarios-empresa {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================================
+   EMPRESA - PREÇOS E AVALIAÇÕES
+   ========================================================= */
+
+.empresa-pagina {
+    width: 100%;
+    max-width: 600px;
+}
+
+.empresa-pagina h1 {
+    margin-top: 0;
+    color: #087ea4;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.empresa-pagina > p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 28px;
+}
+
+/* ---------- PREÇOS ---------- */
+
+.precos-grupo {
+    margin-bottom: 20px;
+}
+
+.precos-grupo label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+    color: #444;
+}
+
+.precos-grupo input,
+.precos-grupo textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 2px solid #e0e7eb;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+}
+
+.precos-grupo textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.precos-grupo input:focus,
+.precos-grupo textarea:focus {
+    border-color: #087ea4;
+}
+
+.botao-empresa-principal {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #087ea4;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-empresa-principal:hover {
+    background: #066580;
+    transform: translateY(-1px);
+}
+
+.botao-empresa-principal:active {
+    transform: translateY(0);
+}
+
+/* ---------- AVALIAÇÕES ---------- */
+
+.resumo-avaliacoes {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    background: #f4f9fb;
+    border: 1px solid #dbeef4;
+}
+
+.resumo-avaliacoes .nota {
+    font-size: 38px;
+    font-weight: bold;
+    color: #087ea4;
+}
+
+.resumo-avaliacoes .quantidade {
+    margin-top: 5px;
+    color: #666;
+}
+
+.lista-avaliacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.avaliacao-empresa {
+    padding: 18px;
+    border: 1px solid #e0e7eb;
+    border-radius: 14px;
+    background: white;
+}
+
+.avaliacao-estrelas {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.avaliacao-usuario {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 7px;
+}
+
+.avaliacao-comentario {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* ---------- MODO ESCURO ---------- */
+
+body.tema-escuro .empresa-pagina > p,
+body.tema-escuro .precos-grupo label,
+body.tema-escuro .avaliacao-usuario {
+    color: #d5d5d5;
+}
+
+body.tema-escuro .precos-grupo input,
+body.tema-escuro .precos-grupo textarea {
+    background: #25333d;
+    color: white;
+    border-color: #40535f;
+}
+
+body.tema-escuro .botao-empresa-secundario {
+    background: transparent;
+    color: #5cc8ed;
+    border-color: #40535f;
+}
+
+body.tema-escuro .botao-empresa-secundario:hover {
+    background: #25333d;
+    border-color: #5cc8ed;
+}
+
+
+body.tema-escuro .resumo-avaliacoes {
+    background: #25333d;
+    border-color: #40535f;
+}
+
+body.tema-escuro .resumo-avaliacoes .quantidade,
+body.tema-escuro .avaliacao-comentario {
+    color: #d5d5d5;
+}
+
+body.tema-escuro .avaliacao-empresa {
+    background: #1b2730;
+    border-color: #40535f;
+}
+
+/* ---------- BOTAO VOLTAR - PREÇOS ----------*/
+.botao-empresa-secundario {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 20px;
+    border: 2px solid #dbe4e8;
+    border-radius: 12px;
+    background: transparent;
+    color: #087ea4;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-empresa-secundario:hover {
+    background: #f1f8fa;
+    border-color: #087ea4;
+}
+
+.botao-empresa-secundario:active {
+    transform: scale(0.99);
+}
+
+body.tema-escuro .botao-empresa-secundario {
+    background: transparent;
+    color: #5cc8ed;
+    border-color: #40535f;
+}
+
+body.tema-escuro .botao-empresa-secundario:hover {
+    background: #25333d;
+    border-color: #5cc8ed;
+}
+
+/* =========================================================
+   PADRÃO DE BOTÕES - ÁREA EMPRESARIAL
+   ========================================================= */
+
+/* BOTÃO PRINCIPAL */
+
+.botao-empresa-principal {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        #087ea4,
+        #0aa6d6
+    );
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow:
+        0 8px 18px
+        rgba(8, 126, 164, 0.20);
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.botao-empresa-principal:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 22px
+        rgba(8, 126, 164, 0.25);
+}
+
+.botao-empresa-principal:active {
+    transform: translateY(0);
+}
+
+
+/* BOTÃO SECUNDÁRIO */
+
+.botao-empresa-secundario {
+    width: 100%;
+    margin-top: 14px;
+    padding: 13px 20px;
+    border: 2px solid #dbe4e8;
+    border-radius: 12px;
+    background: transparent;
+    color: #087ea4;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.botao-empresa-secundario:hover {
+    background: #f1f8fa;
+    border-color: #087ea4;
+    transform: translateY(-1px);
+}
+
+.botao-empresa-secundario:active {
+    transform: translateY(0);
+}
+
+
+/* MODO ESCURO */
+
+body.tema-escuro .botao-empresa-principal {
+    background: linear-gradient(
+        135deg,
+        #075d78,
+        #087ea4
+    );
+}
+
+body.tema-escuro .botao-empresa-secundario {
+    background: transparent;
+    color: #5cc8ed;
+    border-color: #40535f;
+}
+
+body.tema-escuro .botao-empresa-secundario:hover {
+    background: #25333d;
+    border-color: #5cc8ed;
+}
+
+/* =========================
+   SELECT DO CADASTRO EMPRESARIAL
+   ========================= */
+
+.select-auth {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 14px;
+    border: 2px solid #e0e7eb;
+    border-radius: 10px;
+    background: white;
+    color: #444;
+    font-size: 16px;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.select-auth:focus {
+    border-color: #087ea4;
+    box-shadow: 0 0 0 3px rgba(8, 126, 164, 0.08);
+}
+
+.select-auth:hover {
+    border-color: #b9cbd2;
+}
+
+/* Modo escuro */
+
+body.tema-escuro .select-auth {
+    background: #25333d;
+    color: white;
+    border-color: #40535f;
+}
+
+body.tema-escuro .select-auth:focus {
+    border-color: #5cc8ed;
+    box-shadow: 0 0 0 3px rgba(92, 200, 237, 0.08);
 }

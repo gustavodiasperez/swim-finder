@@ -7,7 +7,6 @@ if (usuarioLogado !== "true") {
     window.location.href = "/login";
 }
 
-
 // =========================
 // TEMA
 // =========================
@@ -18,14 +17,12 @@ if (temaSalvo === "escuro") {
     document.body.classList.add("tema-escuro");
 }
 
-
 // =========================
 // FAVORITOS
 // =========================
 
 let favoritos =
     JSON.parse(localStorage.getItem("favoritos")) || [];
-
 
 // =========================
 // PEGAR NOME DA URL
@@ -37,7 +34,6 @@ const parametros =
 const nomePiscina =
     parametros.get("nome");
 
-
 // =========================
 // VOLTAR
 // =========================
@@ -48,7 +44,6 @@ if (voltarApp) {
     });
 }
 
-
 // =========================
 // LOCALIZAÇÃO
 // =========================
@@ -56,67 +51,50 @@ if (voltarApp) {
 let minhaLocalizacao = null;
 
 navigator.geolocation.getCurrentPosition(
-
     function (posicao) {
-
         minhaLocalizacao = {
             latitude: posicao.coords.latitude,
             longitude: posicao.coords.longitude
         };
 
         carregarDetalhes();
-
     },
-
     function () {
-
         carregarDetalhes();
-
     }
-
 );
-
 
 // =========================
 // BUSCAR PISCINA
 // =========================
 
 async function carregarDetalhes() {
-
     try {
-
-        const resposta =
-            await fetch("/piscinas");
+        const resposta = await fetch(
+            "/piscinas/detalhes/" +
+            encodeURIComponent(nomePiscina)
+        );
 
         if (!resposta.ok) {
             throw new Error(
-                "Erro ao buscar piscinas: " + resposta.status
+                "Erro ao buscar detalhes: " +
+                resposta.status
             );
         }
 
-        const piscinas =
-            await resposta.json();
+        const piscina = await resposta.json();
 
-        const piscina =
-            piscinas.find(function (item) {
-                return item.nome === nomePiscina;
-            });
-
-        if (!piscina) {
-
+        if (!piscina || piscina.sucesso === false) {
             paginaDetalhes.innerHTML = `
                 <div class="erro-detalhes">
                     <h2>😕 Local não encontrado</h2>
-
                     <p>
                         Não encontramos esse local.
                     </p>
                 </div>
             `;
-
             return;
         }
-
 
         // =========================
         // DISTÂNCIA
@@ -126,10 +104,9 @@ async function carregarDetalhes() {
 
         if (
             minhaLocalizacao &&
-            piscina.latitude &&
-            piscina.longitude
+            piscina.latitude != null &&
+            piscina.longitude != null
         ) {
-
             distancia =
                 calcularDistancia(
                     minhaLocalizacao.latitude,
@@ -137,9 +114,7 @@ async function carregarDetalhes() {
                     piscina.latitude,
                     piscina.longitude
                 ).toFixed(1);
-
         }
-
 
         // =========================
         // CATEGORIA
@@ -149,32 +124,87 @@ async function carregarDetalhes() {
             "🏊 Piscina pública";
 
         if (piscina.categoria === "academia") {
-            categoriaTexto = "🏋️ Academia";
+            categoriaTexto =
+                "🏋️ Academia";
         }
 
         if (piscina.categoria === "clube") {
-            categoriaTexto = "🏢 Clube";
+            categoriaTexto =
+                "🏢 Clube";
         }
 
         if (piscina.categoria === "hotel") {
-            categoriaTexto = "🏨 Hotel / Day Use";
+            categoriaTexto =
+                "🏨 Hotel / Day Use";
         }
 
+        // =========================
+        // DADOS DA EMPRESA
+        // =========================
+
+        const precosEmpresa =
+            piscina.precos_empresa || {};
+
+        const horariosEmpresa =
+            piscina.horarios_empresa || {};
+
+        const fotosEmpresa =
+            piscina.fotos_empresa || [];
+
+        // =========================
+        // PREÇOS
+        // =========================
+
+        const mensalidade =
+            precosEmpresa.mensalidade ||
+            piscina.mensalidade ||
+            "Não informado";
+
+        const dayUse =
+            precosEmpresa.day_use ||
+            piscina.day_use ||
+            "Não informado";
 
         // =========================
         // HORÁRIOS
         // =========================
 
-        const horario = piscina.horario || {};
+        const horario =
+            Object.keys(horariosEmpresa).length > 0
+                ? horariosEmpresa
+                : (piscina.horario || {});
 
-        const segunda = horario.segunda || "Consultar";
-        const terca = horario.terca || "Consultar";
-        const quarta = horario.quarta || "Consultar";
-        const quinta = horario.quinta || "Consultar";
-        const sexta = horario.sexta || "Consultar";
-        const sabado = horario.sabado || "Consultar";
-        const domingo = horario.domingo || "Consultar";
+        const segunda =
+            horario.segunda || "Consultar";
 
+        const terca =
+            horario.terca || "Consultar";
+
+        const quarta =
+            horario.quarta || "Consultar";
+
+        const quinta =
+            horario.quinta || "Consultar";
+
+        const sexta =
+            horario.sexta || "Consultar";
+
+        const sabado =
+            horario.sabado || "Consultar";
+
+        const domingo =
+            horario.domingo || "Consultar";
+
+        // =========================
+        // FOTO
+        // =========================
+
+        let fotoPrincipal =
+            piscina.foto || "";
+
+        if (fotosEmpresa.length > 0) {
+            fotoPrincipal = fotosEmpresa[0];
+        }
 
         // =========================
         // PÁGINA
@@ -183,17 +213,16 @@ async function carregarDetalhes() {
         paginaDetalhes.innerHTML = `
 
             ${
-                piscina.foto
-                ? `
-                    <img
-                        src="${piscina.foto}"
-                        class="foto-detalhes"
-                        alt="Foto de ${piscina.nome}"
-                    >
-                `
-                : ""
+                fotoPrincipal
+                    ? `
+                        <img
+                            src="${fotoPrincipal}"
+                            class="foto-detalhes"
+                            alt="Foto de ${piscina.nome}"
+                        >
+                    `
+                    : ""
             }
-
 
             <div class="cabecalho-detalhes">
 
@@ -208,11 +237,13 @@ async function carregarDetalhes() {
                     </h1>
 
                     <p class="endereco-detalhes">
-                        📍 ${piscina.endereco || "Endereço não informado"}
+                        📍 ${
+                            piscina.endereco ||
+                            "Endereço não informado"
+                        }
                     </p>
 
                 </div>
-
 
                 <button
                     id="botaoFavoritarDetalhes"
@@ -220,49 +251,47 @@ async function carregarDetalhes() {
                 >
                     ${
                         favoritos.includes(piscina.nome)
-                        ? "⭐ Favorita"
-                        : "☆ Favoritar"
+                            ? "⭐ Favorita"
+                            : "☆ Favoritar"
                     }
                 </button>
 
             </div>
 
-
             <div class="informacoes-detalhes">
-
 
                 <div class="info-detalhe">
 
                     <strong>🏊 Tipo</strong>
 
                     <span>
-                        ${piscina.tipo || "Não informado"}
+                        ${
+                            piscina.tipo ||
+                            "Não informado"
+                        }
                     </span>
 
                 </div>
-
 
                 <div class="info-detalhe preco-detalhe">
 
                     <strong>💰 Mensalidade</strong>
 
                     <span>
-                        ${piscina.mensalidade || "Não informado"}
+                        ${mensalidade}
                     </span>
 
                 </div>
-
 
                 <div class="info-detalhe">
 
                     <strong>🎟️ Day Use</strong>
 
                     <span>
-                        ${piscina.day_use || "Não informado"}
+                        ${dayUse}
                     </span>
 
                 </div>
-
 
                 <div class="info-detalhe">
 
@@ -271,8 +300,8 @@ async function carregarDetalhes() {
                     <span>
                         ${
                             distancia
-                            ? distancia + " km de você"
-                            : "Localização não disponível"
+                                ? distancia + " km de você"
+                                : "Localização não disponível"
                         }
                     </span>
 
@@ -280,6 +309,27 @@ async function carregarDetalhes() {
 
             </div>
 
+            ${
+                precosEmpresa.observacao
+                    ? `
+                        <section class="secao-detalhes">
+
+                            <h2>
+                                💬 Observação sobre preços
+                            </h2>
+
+                            <div class="resumo-local">
+
+                                <p>
+                                    ${precosEmpresa.observacao}
+                                </p>
+
+                            </div>
+
+                        </section>
+                    `
+                    : ""
+            }
 
             <section class="secao-detalhes">
 
@@ -324,15 +374,11 @@ async function carregarDetalhes() {
 
                 </div>
 
-
                 <div class="status-detalhes">
-
                     ${verificarFuncionamento(horario)}
-
                 </div>
 
             </section>
-
 
             <section class="secao-detalhes">
 
@@ -347,18 +393,105 @@ async function carregarDetalhes() {
 
                     <p>
                         <strong>🏊 Estrutura:</strong>
-                        ${piscina.tipo || "Não informado"}
+                        ${
+                            piscina.tipo ||
+                            "Não informado"
+                        }
                     </p>
 
                     <p>
                         <strong>📍 Endereço:</strong>
-                        ${piscina.endereco || "Não informado"}
+                        ${
+                            piscina.endereco ||
+                            "Não informado"
+                        }
                     </p>
+
+                    ${
+                        piscina.descricao_empresa
+                            ? `
+                                <p>
+                                    <strong>📝 Descrição:</strong>
+                                    ${piscina.descricao_empresa}
+                                </p>
+                            `
+                            : ""
+                    }
 
                 </div>
 
             </section>
 
+            ${
+                piscina.telefone_empresa ||
+                piscina.whatsapp_empresa ||
+                piscina.instagram_empresa ||
+                piscina.site_empresa
+                    ? `
+                        <section class="secao-detalhes">
+
+                            <h2>📞 Contato</h2>
+
+                            <div class="resumo-local">
+
+                                ${
+                                    piscina.telefone_empresa
+                                        ? `
+                                            <p>
+                                                <strong>
+                                                    📞 Telefone:
+                                                </strong>
+                                                ${piscina.telefone_empresa}
+                                            </p>
+                                        `
+                                        : ""
+                                }
+
+                                ${
+                                    piscina.whatsapp_empresa
+                                        ? `
+                                            <p>
+                                                <strong>
+                                                    💬 WhatsApp:
+                                                </strong>
+                                                ${piscina.whatsapp_empresa}
+                                            </p>
+                                        `
+                                        : ""
+                                }
+
+                                ${
+                                    piscina.instagram_empresa
+                                        ? `
+                                            <p>
+                                                <strong>
+                                                    📷 Instagram:
+                                                </strong>
+                                                ${piscina.instagram_empresa}
+                                            </p>
+                                        `
+                                        : ""
+                                }
+
+                                ${
+                                    piscina.site_empresa
+                                        ? `
+                                            <p>
+                                                <strong>
+                                                    🌐 Site:
+                                                </strong>
+                                                ${piscina.site_empresa}
+                                            </p>
+                                        `
+                                        : ""
+                                }
+
+                            </div>
+
+                        </section>
+                    `
+                    : ""
+            }
 
             <div class="acoes-detalhes">
 
@@ -371,11 +504,9 @@ async function carregarDetalhes() {
 
             </div>
 
-
             <section class="secao-avaliacoes">
 
                 <h2>⭐ Avaliações</h2>
-
 
                 <div
                     id="mediaAvaliacao"
@@ -384,34 +515,28 @@ async function carregarDetalhes() {
                     Carregando avaliações...
                 </div>
 
-
                 <div class="nova-avaliacao">
 
                     <h3>
                         Deixe sua avaliação
                     </h3>
 
-
                     <div
                         id="estrelasAvaliacao"
                         class="estrelas-avaliacao"
                     >
-
                         <button data-nota="1">☆</button>
                         <button data-nota="2">☆</button>
                         <button data-nota="3">☆</button>
                         <button data-nota="4">☆</button>
                         <button data-nota="5">☆</button>
-
                     </div>
-
 
                     <textarea
                         id="comentarioAvaliacao"
                         placeholder="Conte como foi sua experiência..."
                         maxlength="300"
                     ></textarea>
-
 
                     <button
                         id="enviarAvaliacao"
@@ -422,16 +547,13 @@ async function carregarDetalhes() {
 
                 </div>
 
-
                 <div
                     id="listaAvaliacoes"
                     class="lista-avaliacoes"
                 ></div>
 
             </section>
-
         `;
-
 
         // =========================
         // FAVORITAR
@@ -457,9 +579,7 @@ async function carregarDetalhes() {
                         favoritos =
                             favoritos.filter(
                                 function (nome) {
-
                                     return nome !== piscina.nome;
-
                                 }
                             );
 
@@ -468,7 +588,6 @@ async function carregarDetalhes() {
                         favoritos.push(
                             piscina.nome
                         );
-
                     }
 
                     localStorage.setItem(
@@ -477,15 +596,14 @@ async function carregarDetalhes() {
                     );
 
                     botaoFavoritar.textContent =
-                        favoritos.includes(piscina.nome)
-                        ? "⭐ Favorita"
-                        : "☆ Favoritar";
-
+                        favoritos.includes(
+                            piscina.nome
+                        )
+                            ? "⭐ Favorita"
+                            : "☆ Favoritar";
                 }
             );
-
         }
-
 
         // =========================
         // COMO CHEGAR
@@ -508,9 +626,7 @@ async function carregarDetalhes() {
 
                 }
             );
-
         }
-
 
         // =========================
         // AVALIAÇÕES
@@ -518,9 +634,7 @@ async function carregarDetalhes() {
 
         prepararAvaliacoes();
 
-    }
-
-    catch (erro) {
+    } catch (erro) {
 
         console.error(
             "Erro ao carregar detalhes:",
@@ -541,11 +655,8 @@ async function carregarDetalhes() {
             </div>
 
         `;
-
     }
-
 }
-
 
 // =========================
 // PREPARAR AVALIAÇÕES
@@ -570,7 +681,6 @@ function prepararAvaliacoes() {
             "#enviarAvaliacao"
         );
 
-
     // =========================
     // ESCOLHER ESTRELAS
     // =========================
@@ -590,12 +700,9 @@ function prepararAvaliacoes() {
                     estrelas,
                     notaSelecionada
                 );
-
             }
         );
-
     });
-
 
     // =========================
     // ENVIAR
@@ -612,35 +719,26 @@ function prepararAvaliacoes() {
                         "nomeUsuario"
                     );
 
-
                 if (!nomeUsuario) {
-
                     alert(
                         "Você precisa estar logado para avaliar."
                     );
-
                     return;
-
                 }
 
-
                 if (notaSelecionada === 0) {
-
                     alert(
                         "⭐ Selecione uma nota."
                     );
-
                     return;
-
                 }
-
 
                 try {
 
                     botaoEnviar.disabled = true;
+
                     botaoEnviar.textContent =
                         "Enviando...";
-
 
                     const resposta =
                         await fetch(
@@ -666,22 +764,18 @@ function prepararAvaliacoes() {
 
                                     comentario:
                                         comentario.value.trim()
-
                                 })
                             }
                         );
 
-
                     const resultado =
                         await resposta.json();
-
 
                     console.log(
                         "Resposta do servidor:",
                         resposta.status,
                         resultado
                     );
-
 
                     if (!resposta.ok) {
 
@@ -692,9 +786,7 @@ function prepararAvaliacoes() {
                         );
 
                         return;
-
                     }
-
 
                     if (!resultado.sucesso) {
 
@@ -704,11 +796,10 @@ function prepararAvaliacoes() {
                         );
 
                         return;
-
                     }
 
-
                     // LIMPAR
+
                     comentario.value = "";
 
                     notaSelecionada = 0;
@@ -718,17 +809,13 @@ function prepararAvaliacoes() {
                         0
                     );
 
-
                     await carregarAvaliacoes();
-
 
                     alert(
                         "⭐ Avaliação enviada com sucesso!"
                     );
 
-                }
-
-                catch (erro) {
+                } catch (erro) {
 
                     console.error(
                         "Erro ao enviar avaliação:",
@@ -740,27 +827,19 @@ function prepararAvaliacoes() {
                         erro.message
                     );
 
-                }
-
-                finally {
+                } finally {
 
                     botaoEnviar.disabled = false;
 
                     botaoEnviar.textContent =
                         "Enviar avaliação";
-
                 }
-
             }
         );
-
     }
 
-
     carregarAvaliacoes();
-
 }
-
 
 // =========================
 // ATUALIZAR ESTRELAS
@@ -781,14 +860,11 @@ function atualizarEstrelas(
 
             estrela.textContent =
                 nota <= notaSelecionada
-                ? "★"
-                : "☆";
-
+                    ? "★"
+                    : "☆";
         }
     );
-
 }
-
 
 // =========================
 // CARREGAR AVALIAÇÕES
@@ -806,33 +882,33 @@ async function carregarAvaliacoes() {
             "#listaAvaliacoes"
         );
 
-
-    if (!mediaAvaliacao || !listaAvaliacoes) {
+    if (
+        !mediaAvaliacao ||
+        !listaAvaliacoes
+    ) {
         return;
     }
-
 
     try {
 
         const resposta =
             await fetch(
                 "/avaliacoes/" +
-                encodeURIComponent(nomePiscina)
+                encodeURIComponent(
+                    nomePiscina
+                )
             );
-
 
         if (!resposta.ok) {
 
             throw new Error(
-                "Erro HTTP: " + resposta.status
+                "Erro HTTP: " +
+                resposta.status
             );
-
         }
-
 
         const avaliacoes =
             await resposta.json();
-
 
         if (
             !Array.isArray(avaliacoes) ||
@@ -854,9 +930,7 @@ async function carregarAvaliacoes() {
             listaAvaliacoes.innerHTML = "";
 
             return;
-
         }
-
 
         // =========================
         // MÉDIA
@@ -875,15 +949,13 @@ async function carregarAvaliacoes() {
                             avaliacao.nota
                         )
                     );
-
                 },
                 0
             );
 
-
         const media =
-            soma / avaliacoes.length;
-
+            soma /
+            avaliacoes.length;
 
         mediaAvaliacao.innerHTML = `
 
@@ -892,26 +964,21 @@ async function carregarAvaliacoes() {
             </div>
 
             <p>
-
                 ${avaliacoes.length}
-
                 ${
                     avaliacoes.length === 1
-                    ? "avaliação"
-                    : "avaliações"
+                        ? "avaliação"
+                        : "avaliações"
                 }
-
             </p>
 
         `;
-
 
         // =========================
         // LISTA
         // =========================
 
         listaAvaliacoes.innerHTML = "";
-
 
         avaliacoes
             .slice()
@@ -924,21 +991,19 @@ async function carregarAvaliacoes() {
                             "div"
                         );
 
-
                     item.className =
                         "avaliacao-item";
-
 
                     const nota =
                         Number(
                             avaliacao.nota
                         );
 
-
                     const estrelasTexto =
                         "★".repeat(nota) +
-                        "☆".repeat(5 - nota);
-
+                        "☆".repeat(
+                            5 - nota
+                        );
 
                     item.innerHTML = `
 
@@ -959,17 +1024,13 @@ async function carregarAvaliacoes() {
 
                     `;
 
-
                     listaAvaliacoes.appendChild(
                         item
                     );
-
                 }
             );
 
-    }
-
-    catch (erro) {
+    } catch (erro) {
 
         console.error(
             "Erro ao carregar avaliações:",
@@ -984,11 +1045,8 @@ async function carregarAvaliacoes() {
             </p>
 
         `;
-
     }
-
 }
-
 
 // =========================
 // DISTÂNCIA
@@ -1011,17 +1069,20 @@ function calcularDistancia(
         (lon2 - lon1) *
         Math.PI / 180;
 
-
     const a =
         Math.sin(dLat / 2) ** 2 +
+
         Math.cos(
             lat1 * Math.PI / 180
         ) *
+
         Math.cos(
             lat2 * Math.PI / 180
         ) *
-        Math.sin(dLon / 2) ** 2;
 
+        Math.sin(
+            dLon / 2
+        ) ** 2;
 
     const c =
         2 *
@@ -1030,11 +1091,8 @@ function calcularDistancia(
             Math.sqrt(1 - a)
         );
 
-
     return R * c;
-
 }
-
 
 // =========================
 // STATUS
@@ -1048,10 +1106,8 @@ function verificarFuncionamento(
         return "🔴 Horário não disponível";
     }
 
-
     const agora =
         new Date();
-
 
     const dias = [
         "domingo",
@@ -1063,42 +1119,34 @@ function verificarFuncionamento(
         "sabado"
     ];
 
-
     const diaAtual =
         dias[agora.getDay()];
 
-
     const horarioHoje =
         horario[diaAtual];
-
 
     if (!horarioHoje) {
         return "🔴 Horário não disponível";
     }
 
-
     const horarioTexto =
-        String(horarioHoje).trim();
-
+        String(
+            horarioHoje
+        ).trim();
 
     if (
         horarioTexto.toLowerCase() === "fechado" ||
         horarioTexto.toLowerCase() === "consultar"
     ) {
-
         return "🔴 Horário não disponível";
-
     }
-
 
     const periodos =
         horarioTexto.split(",");
 
-
     const minutosAgora =
         agora.getHours() * 60 +
         agora.getMinutes();
-
 
     for (
         let i = 0;
@@ -1111,18 +1159,15 @@ function verificarFuncionamento(
                 .trim()
                 .split("-");
 
-
         if (partes.length !== 2) {
             continue;
         }
-
 
         const abertura =
             partes[0].trim();
 
         const fechamento =
             partes[1].trim();
-
 
         const horaAbertura =
             Number(
@@ -1134,7 +1179,6 @@ function verificarFuncionamento(
                 abertura.split(":")[1]
             );
 
-
         const horaFechamento =
             Number(
                 fechamento.split(":")[0]
@@ -1145,28 +1189,22 @@ function verificarFuncionamento(
                 fechamento.split(":")[1]
             );
 
-
         if (
             Number.isNaN(horaAbertura) ||
             Number.isNaN(minutoAbertura) ||
             Number.isNaN(horaFechamento) ||
             Number.isNaN(minutoFechamento)
         ) {
-
             continue;
-
         }
-
 
         const minutosAbertura =
             horaAbertura * 60 +
             minutoAbertura;
 
-
         const minutosFechamento =
             horaFechamento * 60 +
             minutoFechamento;
-
 
         if (
             minutosAgora >= minutosAbertura &&
@@ -1177,9 +1215,7 @@ function verificarFuncionamento(
                 `🟢 Aberta agora — ` +
                 `fecha às ${fechamento}`
             );
-
         }
-
 
         if (
             minutosAgora <
@@ -1190,31 +1226,26 @@ function verificarFuncionamento(
                 `🔴 Fechada agora — ` +
                 `abre às ${abertura}`
             );
-
         }
-
     }
 
-
     return "🔴 Fechada agora";
-
 }
-
 
 // =========================
 // MAPA
 // =========================
 
-function abrirMapa(endereco) {
+function abrirMapa(
+    endereco
+) {
 
     const url =
         "https://www.google.com/maps/search/?api=1&query=" +
         encodeURIComponent(endereco);
 
-
     window.open(
         url,
         "_blank"
     );
-
 }

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Fotos - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+
+</head>
+
+<body class="tela-autenticacao">
+
+    <main class="auth-container">
+
+        <div class="auth-card painel-empresa">
+
+            <div class="painel-cabecalho">
+
+                <div class="painel-logo">
+                    📷
+                </div>
+
+                <div>
+
+                    <h1>
+                        Fotos
+                    </h1>
+
+                    <p>
+                        Fotos do estabelecimento
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grupo">
+
+                <label>
+                    Adicionar fotos
+                </label>
+
+                <input
+                    type="file"
+                    id="inputFotos"
+                    accept="image/*"
+                    multiple
+                >
+
+            </div>
+
+
+            <div
+                id="previewFotos"
+                class="preview-fotos"
+            ></div>
+
+
+            <button
+                id="botaoSalvarFotos"
+                class="botao-empresa-principal"
+            >
+                💾 Salvar fotos
+            </button>
+
+
+            <button
+                id="botaoVoltarPainel"
+                class="botao-empresa-secundario"
+            >
+                ← Voltar para o painel
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script src="/frontend/empresa/empresa-fotos.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Horários - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+
+</head>
+
+<body class="tela-autenticacao">
+
+    <main class="auth-container">
+
+        <div class="auth-card painel-empresa">
+
+            <div class="painel-cabecalho">
+
+                <div class="painel-logo">
+                    🕐
+                </div>
+
+                <div>
+
+                    <h1>
+                        Horários
+                    </h1>
+
+                    <p>
+                        Funcionamento do estabelecimento
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="horarios-empresa">
+
+                <div class="campo-horario">
+                    <label>Segunda-feira</label>
+                    <input type="text" id="segunda"
+                        placeholder="Ex: 06:00 - 22:00">
+                </div>
+
+                <div class="campo-horario">
+                    <label>Terça-feira</label>
+                    <input type="text" id="terca"
+                        placeholder="Ex: 06:00 - 22:00">
+                </div>
+
+                <div class="campo-horario">
+                    <label>Quarta-feira</label>
+                    <input type="text" id="quarta"
+                        placeholder="Ex: 06:00 - 22:00">
+                </div>
+
+                <div class="campo-horario">
+                    <label>Quinta-feira</label>
+                    <input type="text" id="quinta"
+                        placeholder="Ex: 06:00 - 22:00">
+                </div>
+
+                <div class="campo-horario">
+                    <label>Sexta-feira</label>
+                    <input type="text" id="sexta"
+                        placeholder="Ex: 06:00 - 22:00">
+                </div>
+
+                <div class="campo-horario">
+                    <label>Sábado</label>
+                    <input type="text" id="sabado"
+                        placeholder="Ex: 08:00 - 18:00">
+                </div>
+
+                <div class="campo-horario">
+                    <label>Domingo</label>
+                    <input type="text" id="domingo"
+                        placeholder="Fechado">
+                </div>
+
+            </div>
+
+
+            <button
+                id="botaoSalvarHorarios"
+                class="botao-empresa-principal"
+            >
+                💾 Salvar horários
+            </button>
+
+
+            <button
+                id="botaoVoltarPainelHorarios"
+                class="botao-empresa-secundario"
+            >
+                ← Voltar para o painel
+            </button>
+
+        </div>
+
+    </main>
+
+
+    <script src="/frontend/empresa/empresa-horarios.js"></script>
+
+</body>
+
+</html>

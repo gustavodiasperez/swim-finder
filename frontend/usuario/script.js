@@ -36,21 +36,6 @@ if (usuarioLogado !== "true") {
     window.location.href = "/login";
 }
 
-const botaoSair = document.querySelector("#botaoSair");
-
-if (botaoSair) {
-
-    botaoSair.addEventListener("click", function () {
-
-        localStorage.removeItem("usuarioLogado");
-        localStorage.removeItem("nomeUsuario");
-
-        window.location.href = "/login";
-
-    });
-
-}
-
 function removerAcentos(texto) {
     return texto
         .normalize("NFD")
@@ -963,7 +948,18 @@ busca.addEventListener("input", async function () {
 });
 
 
-function aplicarTema() {}
+// =========================
+// AÇÕES DO MENU
+// =========================
+
+if (botaoPerfil) {
+    botaoPerfil.addEventListener("click", function () {
+        window.location.href = "/perfil";
+    });
+}
+
+
+// MODO ESCURO
 
 const temaSalvo = localStorage.getItem("tema");
 
@@ -973,11 +969,7 @@ if (temaSalvo === "escuro") {
 
 if (botaoTema) {
 
-    if (temaSalvo === "escuro") {
-        botaoTema.textContent = "☀️ Modo claro";
-    } else {
-        botaoTema.textContent = "🌙 Modo escuro";
-    }
+    atualizarTextoTema();
 
     botaoTema.addEventListener("click", function () {
 
@@ -985,51 +977,52 @@ if (botaoTema) {
             document.body.classList.toggle("tema-escuro");
 
         if (escuroAtivo) {
-
             localStorage.setItem("tema", "escuro");
-            botaoTema.textContent = "☀️ Modo claro";
-
         } else {
-
             localStorage.setItem("tema", "claro");
-            botaoTema.textContent = "🌙 Modo escuro";
-
         }
 
+        atualizarTextoTema();
     });
 }
 
-function abrirDetalhesPiscina(nomePiscina) {
 
-    const card = Array.from(
-        document.querySelectorAll(".card-piscina")
-    ).find(function (card) {
+function atualizarTextoTema() {
 
-        const titulo = card.querySelector("h2");
+    if (!botaoTema) {
+        return;
+    }
 
-        return titulo && titulo.textContent === nomePiscina;
+    const estaEscuro =
+        document.body.classList.contains("tema-escuro");
 
-    });
-
-    if (card) {
-        card.click();
+    if (estaEscuro) {
+        botaoTema.innerHTML = "☀️ <span>Modo claro</span>";
+    } else {
+        botaoTema.innerHTML = "🌙 <span>Modo escuro</span>";
     }
 }
 
-if (botaoPerfil) {
 
-    botaoPerfil.addEventListener("click", function () {
-
-        window.location.href = "/perfil";
-
-    });
-
-}
-
-function abrirPaginaDetalhes(nomePiscina) {
-
+//DETALHES
+function abrirPaginaDetalhes(nome) {
     window.location.href =
         "/detalhes?nome=" +
-        encodeURIComponent(nomePiscina);
+        encodeURIComponent(nome);
+}
 
+// SAIR
+
+if (botaoSair) {
+
+    botaoSair.addEventListener("click", function () {
+
+        localStorage.removeItem("usuarioLogado");
+        localStorage.removeItem("nomeUsuario");
+        localStorage.removeItem("emailUsuario");
+        localStorage.removeItem("fotoPerfil");
+        localStorage.removeItem("tema");
+
+        window.location.href = "/login";
+    });
 }

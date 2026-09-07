@@ -1,8 +1,67 @@
 const formCadastroEmpresa =
-    document.querySelector(
-        "#formCadastroEmpresa"
-    );
+    document.querySelector("#formCadastroEmpresa");
 
+const piscinaNome =
+    document.querySelector("#piscinaNome");
+
+// =========================
+// CARREGAR PISCINAS
+// =========================
+
+async function carregarPiscinas() {
+    try {
+        const resposta =
+            await fetch("/piscinas");
+
+        if (!resposta.ok) {
+            throw new Error(
+                "Erro ao carregar piscinas."
+            );
+        }
+
+        const piscinas =
+            await resposta.json();
+
+        piscinaNome.innerHTML = `
+            <option value="">
+                Selecione a piscina
+            </option>
+        `;
+
+        piscinas.forEach(function (piscina) {
+
+            const opcao =
+                document.createElement("option");
+
+            opcao.value =
+                piscina.nome;
+
+            opcao.textContent =
+                piscina.nome;
+
+            piscinaNome.appendChild(opcao);
+        });
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao carregar piscinas:",
+            erro
+        );
+
+        piscinaNome.innerHTML = `
+            <option value="">
+                Erro ao carregar piscinas
+            </option>
+        `;
+    }
+}
+
+carregarPiscinas();
+
+// =========================
+// CADASTRO
+// =========================
 
 formCadastroEmpresa.addEventListener(
     "submit",
@@ -10,40 +69,27 @@ formCadastroEmpresa.addEventListener(
 
         evento.preventDefault();
 
-
         const senha =
-            document.querySelector(
-                "#senha"
-            ).value;
-
+            document.querySelector("#senha").value;
 
         const confirmarSenha =
             document.querySelector(
                 "#confirmarSenha"
             ).value;
 
-
         if (senha !== confirmarSenha) {
-
             alert(
                 "❌ As senhas não são iguais."
             );
-
             return;
-
         }
 
-
         if (senha.length < 6) {
-
             alert(
                 "❌ A senha deve ter pelo menos 6 caracteres."
             );
-
             return;
-
         }
-
 
         const dados = {
 
@@ -56,6 +102,11 @@ formCadastroEmpresa.addEventListener(
                 document.querySelector(
                     "#nomeFantasia"
                 ).value.trim(),
+
+            piscina_nome:
+                document.querySelector(
+                    "#piscinaNome"
+                ).value,
 
             cnpj:
                 document.querySelector(
@@ -145,9 +196,7 @@ formCadastroEmpresa.addEventListener(
                 ).value.trim(),
 
             senha: senha
-
         };
-
 
         try {
 
@@ -164,14 +213,11 @@ formCadastroEmpresa.addEventListener(
 
                         body:
                             JSON.stringify(dados)
-
                     }
                 );
 
-
             const resultado =
                 await resposta.json();
-
 
             if (resultado.sucesso) {
 
@@ -189,7 +235,6 @@ formCadastroEmpresa.addEventListener(
                     "❌ " +
                     resultado.mensagem
                 );
-
             }
 
         } catch (erro) {
@@ -199,8 +244,6 @@ formCadastroEmpresa.addEventListener(
             alert(
                 "❌ Erro ao conectar com o servidor."
             );
-
         }
-
     }
 );

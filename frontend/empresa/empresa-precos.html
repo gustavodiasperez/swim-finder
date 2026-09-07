@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Preços - Swim Finder</title>
+
+    <link
+        rel="stylesheet"
+        href="/frontend/style.css"
+    >
+</head>
+
+<body class="tela-autenticacao">
+
+    <main class="auth-container">
+
+        <div class="auth-card empresa-pagina">
+
+            <h1>💰 Preços</h1>
+
+            <p>
+                Cadastre os preços praticados pela sua empresa.
+            </p>
+
+            <div class="precos-grupo">
+                <label for="mensalidade">
+                    💳 Mensalidade
+                </label>
+
+                <input
+                    type="text"
+                    id="mensalidade"
+                    placeholder="Ex.: R$ 250,00"
+                >
+            </div>
+
+            <div class="precos-grupo">
+                <label for="dayUse">
+                    🎟️ Day Use
+                </label>
+
+                <input
+                    type="text"
+                    id="dayUse"
+                    placeholder="Ex.: R$ 50,00"
+                >
+            </div>
+
+            <div class="precos-grupo">
+                <label for="observacaoPrecos">
+                    📝 Observações
+                </label>
+
+                <textarea
+                    id="observacaoPrecos"
+                    placeholder="Ex.: Crianças possuem desconto."
+                ></textarea>
+            </div>
+
+            <button
+                id="botaoSalvarPrecos"
+                class="botao-empresa-principal"
+            >
+                💾 Salvar preços
+            </button>
+
+            <button
+                id="botaoVoltarPainel"
+                class="botao-empresa-secundario"
+            >
+                ← Voltar ao painel
+            </button>
+
+        </div>
+
+    </main>
+
+    <script src="/frontend/empresa/empresa-precos.js"></script>
+
+</body>
+
+</html>

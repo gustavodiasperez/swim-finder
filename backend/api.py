@@ -5,7 +5,7 @@ from pydantic import BaseModel
 import hashlib
 import json
 import os
-
+import re
 
 app = FastAPI()
 
@@ -352,6 +352,14 @@ def cadastrar_usuario(usuario: Usuario):
     usuarios = carregar_usuarios()
 
     email = usuario.email.strip().lower()
+
+    padrao_email = r"^[^@\s]+@[^@\s]+\.[^@\s]+$"
+
+    if not re.match(padrao_email, email):
+            return {
+                "sucesso": False,
+                "mensagem": "Digite um e-mail válido."
+            }
 
     if not usuario.nome.strip():
         return {

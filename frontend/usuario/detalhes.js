@@ -215,11 +215,63 @@ async function carregarDetalhes() {
             ${
                 fotoPrincipal
                     ? `
-                        <img
-                            src="${fotoPrincipal}"
-                            class="foto-detalhes"
-                            alt="Foto de ${piscina.nome}"
-                        >
+                        <div class="galeria-detalhes">
+
+                            <div class="galeria-principal">
+
+                                <button
+                                    id="fotoAnterior"
+                                    class="seta-galeria esquerda"
+                                    type="button"
+                                >
+                                    ‹
+                                </button>
+
+                                <img
+                                    id="fotoPrincipalDetalhes"
+                                    src="${fotoPrincipal}"
+                                    class="foto-detalhes"
+                                    alt="Foto de ${piscina.nome}"
+                                >
+
+                                <button
+                                    id="proximaFoto"
+                                    class="seta-galeria direita"
+                                    type="button"
+                                >
+                                    ›
+                                </button>
+
+                            </div>
+
+                            ${
+                                fotosEmpresa.length > 1
+                                    ? `
+                                        <div class="miniaturas-detalhes">
+                                            ${fotosEmpresa
+                                                .map(
+                                                    function (foto, indice) {
+                                                        return `
+                                                            <img
+                                                                src="${foto}"
+                                                                class="miniatura-detalhes ${
+                                                                    indice === 0
+                                                                        ? "miniatura-ativa"
+                                                                        : ""
+                                                                }"
+                                                                data-foto="${foto}"
+                                                                alt="Foto ${indice + 1} de ${piscina.nome}"
+                                                            >
+                                                        `;
+                                                    }
+                                                )
+                                                .join("")}
+                                        </div>
+                                    `
+                                    : ""
+                            }
+
+                        </div>
                     `
                     : ""
             }
@@ -634,6 +686,89 @@ async function carregarDetalhes() {
 
         prepararAvaliacoes();
 
+        // =========================
+        // GALERIA DE FOTOS
+        // =========================
+
+        const miniaturasDetalhes =
+            document.querySelectorAll(".miniatura-detalhes");
+
+        miniaturasDetalhes.forEach(function (miniatura) {
+
+            miniatura.addEventListener("click", function () {
+
+                console.log("CLIQUEI NA MINIATURA");
+
+                const fotoPrincipalDetalhes =
+                    document.querySelector("#fotoPrincipalDetalhes");
+
+                fotoPrincipalDetalhes.src =
+                    miniatura.src;
+            });
+
+        });
+
+        let indiceFotoAtual = 0;
+
+        const fotoAnterior =
+            document.querySelector("#fotoAnterior");
+
+        const proximaFoto =
+            document.querySelector("#proximaFoto");
+
+        function mostrarFoto(indice) {
+
+            if (fotosEmpresa.length === 0) {
+                return;
+            }
+
+            indiceFotoAtual =
+                (indice + fotosEmpresa.length) %
+                fotosEmpresa.length;
+
+            fotoPrincipalDetalhes.src =
+                fotosEmpresa[indiceFotoAtual];
+
+            miniaturasDetalhes.forEach(
+                function (item, indice) {
+
+                    item.classList.toggle(
+                        "miniatura-ativa",
+                        indice === indiceFotoAtual
+                    );
+
+                }
+            );
+        }
+
+        if (fotoAnterior) {
+
+            fotoAnterior.addEventListener(
+                "click",
+                function () {
+
+                    mostrarFoto(
+                        indiceFotoAtual - 1
+                    );
+
+                }
+            );
+        }
+
+        if (proximaFoto) {
+
+            proximaFoto.addEventListener(
+                "click",
+                function () {
+
+                    mostrarFoto(
+                        indiceFotoAtual + 1
+                    );
+
+                }
+            );
+        }
+
     } catch (erro) {
 
         console.error(
@@ -657,6 +792,7 @@ async function carregarDetalhes() {
         `;
     }
 }
+
 
 // =========================
 // PREPARAR AVALIAÇÕES

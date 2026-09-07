@@ -353,14 +353,26 @@ def cadastrar_usuario(usuario: Usuario):
 
     email = usuario.email.strip().lower()
 
-    for usuario_existente in usuarios:
+    if not usuario.nome.strip():
+        return {
+            "sucesso": False,
+            "mensagem": "O nome não pode ficar vazio."
+        }
 
-        if usuario_existente["email"] == email:
+    if len(usuario.senha) < 6:
+        return {
+            "sucesso": False,
+            "mensagem": "A senha deve ter pelo menos 6 caracteres."
+        }
 
-            return {
-                "sucesso": False,
-                "mensagem": "Este e-mail já está cadastrado."
-            }
+        for usuario_existente in usuarios:
+
+            if usuario_existente["email"] == email:
+
+                return {
+                    "sucesso": False,
+                    "mensagem": "Este e-mail já está cadastrado."
+                }
 
     novo_usuario = {
 

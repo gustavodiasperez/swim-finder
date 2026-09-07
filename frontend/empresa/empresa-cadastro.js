@@ -60,6 +60,128 @@ async function carregarPiscinas() {
 carregarPiscinas();
 
 // =========================
+// VALIDAR CNPJ
+// =========================
+
+function validarCNPJ(cnpj) {
+    cnpj = cnpj.replace(/\D/g, "");
+
+    if (cnpj.length !== 14) {
+        return false;
+    }
+
+    if (/^(\d)\1{13}$/.test(cnpj)) {
+        return false;
+    }
+
+    let tamanho = 12;
+    let numeros = cnpj.substring(0, tamanho);
+    let digitos = cnpj.substring(tamanho);
+
+    let soma = 0;
+    let posicao = tamanho - 7;
+
+    for (let i = tamanho; i >= 1; i--) {
+        soma += Number(numeros.charAt(tamanho - i)) * posicao;
+        posicao--;
+
+        if (posicao < 2) {
+            posicao = 9;
+        }
+    }
+
+    let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+
+    if (resultado !== Number(digitos.charAt(0))) {
+        return false;
+    }
+
+    tamanho = 13;
+    numeros = cnpj.substring(0, tamanho);
+
+    soma = 0;
+    posicao = tamanho - 7;
+
+    for (let i = tamanho; i >= 1; i--) {
+        soma += Number(numeros.charAt(tamanho - i)) * posicao;
+        posicao--;
+
+        if (posicao < 2) {
+            posicao = 9;
+        }
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
+
+    return resultado === Number(digitos.charAt(1));
+}
+
+// =========================
+// VALIDAR TELEFONE
+// =========================
+
+function validarTelefone(telefone) {
+    const numeros = telefone.replace(/\D/g, "");
+
+    return numeros.length === 10 || numeros.length === 11;
+}
+
+// =========================
+// BUSCAR CEP
+// =========================
+
+async function buscarCEP(cep) {
+    cep = cep.replace(/\D/g, "");
+
+    if (cep.length !== 8) {
+        return;
+    }
+
+    try {
+        const resposta = await fetch(
+            `https://viacep.com.br/ws/${cep}/json/`
+        );
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao consultar CEP.");
+        }
+
+        const dados = await resposta.json();
+
+        if (dados.erro) {
+            alert("❌ CEP não encontrado.");
+            return;
+        }
+
+        document.querySelector("#endereco").value =
+            dados.logradouro || "";
+
+        document.querySelector("#bairro").value =
+            dados.bairro || "";
+
+        document.querySelector("#cidade").value =
+            dados.localidade || "";
+
+        document.querySelector("#estado").value =
+            dados.uf || "";
+
+    } catch (erro) {
+        console.error("Erro ao buscar CEP:", erro);
+        alert("❌ Não foi possível consultar o CEP.");
+    }
+}
+
+    const campoCEP =
+        document.querySelector("#cep");
+
+    campoCEP.addEventListener(
+        "blur",
+        function () {
+            buscarCEP(campoCEP.value);
+        }
+    );
+
+// =========================
 // CADASTRO
 // =========================
 
@@ -77,6 +199,9 @@ formCadastroEmpresa.addEventListener(
                 "#confirmarSenha"
             ).value;
 
+        const cnpj =
+            document.querySelector("#cnpj").value.trim();
+
         if (senha !== confirmarSenha) {
             alert(
                 "❌ As senhas não são iguais."
@@ -88,6 +213,27 @@ formCadastroEmpresa.addEventListener(
             alert(
                 "❌ A senha deve ter pelo menos 6 caracteres."
             );
+            return;
+        }
+
+        if (!validarCNPJ(cnpj)) {
+            alert("❌ CNPJ inválido.");
+            return;
+        }
+        
+        const telefone =
+            document.querySelector("#telefone").value.trim();
+
+        const whatsapp =
+            document.querySelector("#whatsapp").value.trim();
+
+        if (!validarTelefone(telefone)) {
+            alert("❌ Telefone inválido.");
+            return;
+        }
+
+        if (whatsapp && !validarTelefone(whatsapp)) {
+            alert("❌ WhatsApp inválido.");
             return;
         }
 

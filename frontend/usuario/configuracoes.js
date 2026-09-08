@@ -624,7 +624,7 @@ document
                     await fetch(
                         "/alterar-senha",
                         {
-                            method: "POST",
+                            method: "PUT",
 
                             headers: {
                                 "Content-Type":

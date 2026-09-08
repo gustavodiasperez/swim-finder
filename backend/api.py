@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -6,10 +6,119 @@ import hashlib
 import json
 import os
 import re
+import time
+import secrets
 
 app = FastAPI()
 
+sessoes_usuario = {}
+sessoes_empresa = {}
 
+TEMPO_SESSAO = 60 * 60 * 24  # 24 horas
+
+
+def criar_sessao(email, tipo):
+    token = secrets.token_urlsafe(32)
+
+    sessao = {
+        "email": email,
+        "expira": time.time() + TEMPO_SESSAO
+    }
+
+    if tipo == "usuario":
+        sessoes_usuario[token] = sessao
+    else:
+        sessoes_empresa[token] = sessao
+
+    return token
+
+
+def obter_sessao(request: Request, tipo):
+    token = request.cookies.get("sessao")
+
+    if not token:
+        return None
+
+    sessoes = (
+        sessoes_usuario
+        if tipo == "usuario"
+        else sessoes_empresa
+    )
+
+    sessao = sessoes.get(token)
+
+    if not sessao:
+        return None
+
+    if sessao["expira"] < time.time():
+        sessoes.pop(token, None)
+        return None
+
+    return sessao
+
+
+def apagar_sessao(request: Request, tipo):
+    token = request.cookies.get("sessao")
+
+    if not token:
+        return
+
+    sessoes = (
+        sessoes_usuario
+        if tipo == "usuario"
+        else sessoes_empresa
+    )
+
+    sessoes.pop(token, None)
+
+# ======================================
+# TENTATIVAS DE LOGIN
+# ======================================
+
+tentativas_login = {}
+
+MAX_TENTATIVAS = 5
+TEMPO_BLOQUEIO = 300  # 5 minutos
+
+
+def verificar_limite_login(chave):
+    agora = time.time()
+
+    registro = tentativas_login.get(chave)
+
+    if not registro:
+        return True
+
+    if registro["bloqueado_ate"] > agora:
+        return False
+
+    if registro["bloqueado_ate"] > 0:
+        tentativas_login.pop(chave, None)
+
+    return True
+
+
+def registrar_tentativa_falha(chave):
+    agora = time.time()
+
+    registro = tentativas_login.get(
+        chave,
+        {
+            "tentativas": 0,
+            "bloqueado_ate": 0
+        }
+    )
+
+    registro["tentativas"] += 1
+
+    if registro["tentativas"] >= MAX_TENTATIVAS:
+        registro["bloqueado_ate"] = agora + TEMPO_BLOQUEIO
+
+    tentativas_login[chave] = registro
+
+
+def limpar_tentativas(chave):
+    tentativas_login.pop(chave, None)
 # =========================================================
 # CAMINHOS
 # =========================================================
@@ -418,6 +527,60 @@ def cadastrar_usuario(usuario: Usuario):
 
     }
 
+# =========================================================
+# SEGURANÇA - LIMITE DE TENTATIVAS DE LOGIN
+# =========================================================
+
+tentativas_login = {}
+
+MAX_TENTATIVAS = 5
+TEMPO_BLOQUEIO = 300  # 5 minutos
+
+
+def verificar_limite_login(chave):
+    agora = time.time()
+
+    registro = tentativas_login.get(chave)
+
+    if not registro:
+        return True
+
+    tentativas = registro["tentativas"]
+    bloqueado_ate = registro["bloqueado_ate"]
+
+    if bloqueado_ate > agora:
+        return False
+
+    if bloqueado_ate > 0 and bloqueado_ate <= agora:
+        tentativas_login.pop(chave, None)
+
+    return True
+
+
+def registrar_tentativa_falha(chave):
+    agora = time.time()
+
+    registro = tentativas_login.get(
+        chave,
+        {
+            "tentativas": 0,
+            "bloqueado_ate": 0
+        }
+    )
+
+    registro["tentativas"] += 1
+
+    if registro["tentativas"] >= MAX_TENTATIVAS:
+        registro["bloqueado_ate"] = (
+            agora + TEMPO_BLOQUEIO
+        )
+
+    tentativas_login[chave] = registro
+
+
+def limpar_tentativas(chave):
+    tentativas_login.pop(chave, None)
+
 
 # =========================================================
 # LOGIN DE USUÁRIO
@@ -435,45 +598,58 @@ def abrir_login():
 
 
 @app.post("/login")
-def fazer_login(dados: Login):
+def fazer_login(
+    dados: Login,
+    request: Request,
+    response: Response
+):
 
     usuarios = carregar_usuarios()
 
     email = dados.email.strip().lower()
 
-    senha_hash = gerar_hash(
-        dados.senha
-    )
+    chave = f"{request.client.host}:{email}"
+
+    if not verificar_limite_login(chave):
+        return {
+            "sucesso": False,
+            "mensagem": "Muitas tentativas. Tente novamente em 5 minutos."
+        }
+
+    senha_hash = gerar_hash(dados.senha)
 
     for usuario in usuarios:
-
         if (
             usuario["email"] == email
-            and
-            usuario["senha"] == senha_hash
+            and usuario["senha"] == senha_hash
         ):
+            limpar_tentativas(chave)
 
-            return {
+            token = criar_sessao(
+            usuario["email"],
+            "usuario"
+        )
 
-                "sucesso":
-                    True,
+        response.set_cookie(
+            key="sessao",
+            value=token,
+            httponly=True,
+            secure=False,
+            samesite="lax",
+            max_age=TEMPO_SESSAO
+        )
 
-                "nome":
-                    usuario["nome"],
-
-                "mensagem":
-                    "Login realizado com sucesso."
-
+        return {
+                "sucesso": True,
+                "nome": usuario["nome"],
+                "mensagem": "Login realizado com sucesso."
             }
 
+    registrar_tentativa_falha(chave)
+
     return {
-
-        "sucesso":
-            False,
-
-        "mensagem":
-            "E-mail ou senha incorretos."
-
+        "sucesso": False,
+        "mensagem": "E-mail ou senha incorretos."
     }
 
 
@@ -1024,60 +1200,78 @@ def abrir_login_empresa():
 
 @app.post("/empresa/login")
 def fazer_login_empresa(
-    dados: LoginEmpresa
+    dados: LoginEmpresa,
+    request: Request,
+    response: Response
 ):
 
     empresas = carregar_empresas()
 
     email = dados.email.strip().lower()
 
-    senha_hash = gerar_hash(
-        dados.senha
-    )
+    chave = f"empresa:{request.client.host}:{email}"
+
+    if not verificar_limite_login(chave):
+        return {
+            "sucesso": False,
+            "mensagem": "Muitas tentativas. Tente novamente em 5 minutos."
+        }
+
+    senha_hash = gerar_hash(dados.senha)
 
     for empresa in empresas:
-
         if (
             empresa["email"] == email
-            and
-            empresa["senha"] == senha_hash
+            and empresa["senha"] == senha_hash
         ):
 
             if empresa.get("status") != "aprovada":
-
                 return {
-
-                    "sucesso":
-                        False,
-
-                    "mensagem":
-                        "Seu cadastro ainda está em análise."
-
+                    "sucesso": False,
+                    "mensagem": "Seu cadastro ainda está em análise."
                 }
 
+            limpar_tentativas(chave)
+
+            token = criar_sessao(
+                empresa["email"],
+                "empresa"
+            )
+
+            response.set_cookie(
+                key="sessao",
+                value=token,
+                httponly=True,
+                secure=False,
+                samesite="lax",
+                max_age=TEMPO_SESSAO
+            )
+
             return {
-
-                "sucesso":
-                    True,
-
-                "nome":
-                    empresa["nome_fantasia"],
-
-                "mensagem":
-                    "Login realizado com sucesso."
-
+                "sucesso": True,
+                "nome": empresa["nome_fantasia"],
+                "mensagem": "Login realizado com sucesso."
             }
 
+    registrar_tentativa_falha(chave)
+
     return {
-
-        "sucesso":
-            False,
-
-        "mensagem":
-            "E-mail ou senha incorretos."
-
+        "sucesso": False,
+        "mensagem": "E-mail ou senha incorretos."
     }
 
+@app.post("/logout")
+def logout(request: Request, response: Response):
+
+    apagar_sessao(request, "usuario")
+    apagar_sessao(request, "empresa")
+
+    response.delete_cookie("sessao")
+
+    return {
+        "sucesso": True,
+        "mensagem": "Logout realizado com sucesso."
+    }
 
 # =========================================================
 # EMPRESA - PAINEL
@@ -1112,8 +1306,26 @@ def abrir_editar_empresa():
 @app.put("/empresa/{email}")
 def atualizar_empresa(
     email: str,
-    dados: AtualizarEmpresa
+    dados: AtualizarEmpresa,
+    request: Request
 ):
+    sessao = obter_sessao(request, "empresa")
+
+    if not sessao:
+        return {
+            "sucesso": False,
+            "mensagem": "Não autenticado."
+        }
+
+    email = email.strip().lower()
+
+    if sessao["email"] != email:
+        return {
+            "sucesso": False,
+            "mensagem": "Acesso não autorizado."
+        }
+
+    empresas = carregar_empresas()
 
     empresas = carregar_empresas()
 
@@ -1257,12 +1469,27 @@ def abrir_fotos_empresa():
 @app.put("/empresa/fotos/{email}")
 def atualizar_fotos_empresa(
     email: str,
-    dados: FotosEmpresa
+    dados: FotosEmpresa,
+    request: Request
 ):
 
-    empresas = carregar_empresas()
+    sessao = obter_sessao(request, "empresa")
+
+    if not sessao:
+        return {
+            "sucesso": False,
+            "mensagem": "Não autenticado."
+        }
 
     email = email.strip().lower()
+
+    if sessao["email"] != email:
+        return {
+            "sucesso": False,
+            "mensagem": "Acesso não autorizado."
+        }
+
+    empresas = carregar_empresas()
 
     for empresa in empresas:
 
@@ -1271,28 +1498,16 @@ def atualizar_fotos_empresa(
 
         empresa["fotos"] = dados.fotos
 
-        salvar_empresas(
-            empresas
-        )
+        salvar_empresas(empresas)
 
         return {
-
-            "sucesso":
-                True,
-
-            "mensagem":
-                "Fotos salvas com sucesso!"
-
+            "sucesso": True,
+            "mensagem": "Fotos atualizadas com sucesso!"
         }
 
     return {
-
-        "sucesso":
-            False,
-
-        "mensagem":
-            "Empresa não encontrada."
-
+        "sucesso": False,
+        "mensagem": "Empresa não encontrada."
     }
 
 
@@ -1314,8 +1529,54 @@ def abrir_horarios_empresa():
 @app.put("/empresa/horarios/{email}")
 def atualizar_horarios_empresa(
     email: str,
-    dados: HorariosEmpresa
+    dados: HorariosEmpresa,
+    request: Request
 ):
+
+    sessao = obter_sessao(request, "empresa")
+
+    if not sessao:
+        return {
+            "sucesso": False,
+            "mensagem": "Não autenticado."
+        }
+
+    email = email.strip().lower()
+
+    if sessao["email"] != email:
+        return {
+            "sucesso": False,
+            "mensagem": "Acesso não autorizado."
+        }
+
+    empresas = carregar_empresas()
+
+    for empresa in empresas:
+
+        if empresa["email"] != email:
+            continue
+
+        empresa["horarios"] = {
+            "segunda": dados.segunda.strip(),
+            "terca": dados.terca.strip(),
+            "quarta": dados.quarta.strip(),
+            "quinta": dados.quinta.strip(),
+            "sexta": dados.sexta.strip(),
+            "sabado": dados.sabado.strip(),
+            "domingo": dados.domingo.strip()
+        }
+
+        salvar_empresas(empresas)
+
+        return {
+            "sucesso": True,
+            "mensagem": "Horários atualizados com sucesso!"
+        }
+
+    return {
+        "sucesso": False,
+        "mensagem": "Empresa não encontrada."
+    }
 
     empresas = carregar_empresas()
 
@@ -1392,8 +1653,50 @@ def abrir_precos_empresa():
 @app.put("/empresa/precos/{email}")
 def atualizar_precos_empresa(
     email: str,
-    dados: PrecosEmpresa
+    dados: PrecosEmpresa,
+    request: Request
 ):
+
+    sessao = obter_sessao(request, "empresa")
+
+    if not sessao:
+        return {
+            "sucesso": False,
+            "mensagem": "Não autenticado."
+        }
+
+    email = email.strip().lower()
+
+    if sessao["email"] != email:
+        return {
+            "sucesso": False,
+            "mensagem": "Acesso não autorizado."
+        }
+
+    empresas = carregar_empresas()
+
+    for empresa in empresas:
+
+        if empresa["email"] != email:
+            continue
+
+        empresa["precos"] = {
+            "mensalidade": dados.mensalidade.strip(),
+            "day_use": dados.day_use.strip(),
+            "observacao": dados.observacao.strip()
+        }
+
+        salvar_empresas(empresas)
+
+        return {
+            "sucesso": True,
+            "mensagem": "Preços atualizados com sucesso!"
+        }
+
+    return {
+        "sucesso": False,
+        "mensagem": "Empresa não encontrada."
+    }
 
     empresas = carregar_empresas()
 

@@ -34,6 +34,11 @@
             "sexta": "6",
             "sabado": "6",
             "domingo": "fechado"
+        },
+        "precos": {
+            "mensalidade": "250",
+            "day_use": "",
+            "observacao": ""
         }
     }
 ]

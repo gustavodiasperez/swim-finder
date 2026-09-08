@@ -1015,13 +1015,20 @@ function abrirPaginaDetalhes(nome) {
 
 if (botaoSair) {
 
-    botaoSair.addEventListener("click", function () {
+    botaoSair.addEventListener("click", async function () {
+
+        try {
+            await fetch("/logout", {
+                method: "POST"
+            });
+        } catch (erro) {
+            console.error("Erro ao fazer logout:", erro);
+        }
 
         localStorage.removeItem("usuarioLogado");
         localStorage.removeItem("nomeUsuario");
         localStorage.removeItem("emailUsuario");
         localStorage.removeItem("fotoPerfil");
-        localStorage.removeItem("tema");
 
         window.location.href = "/login";
     });
